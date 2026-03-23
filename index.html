@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Future of Agentic Web Design — Workhorse × GoDoGood</title>
+  <meta name="description" content="A conversation between TJ Dhillon (Workhorse) and Rob Sulzer (GoDoGood) on how AI agents are reshaping how we build, maintain, and sell websites.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="The Future of Web Design Is Agentic">
+  <meta property="og:description" content="How AI agents are reshaping how we build, maintain, and sell websites — and what it means for the design industry.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=1200&h=630&fit=crop">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Future of Web Design Is Agentic">
+  <meta name="twitter:description" content="How AI agents are reshaping how we build, maintain, and sell websites.">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◆</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #FAFAF8;
+      --text: #1A1A1A;
+      --text-muted: #6B6B6B;
+      --accent: #2C2C2C;
+      --accent-light: #F0EFED;
+      --border: #E5E4E1;
+      --highlight: #E8E6E1;
+      --quote-bg: #F5F4F1;
+      --nav-height: 56px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: var(--nav-height);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* --- Sticky Nav --- */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(250, 250, 248, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      height: var(--nav-height);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    nav.scrolled {
+      border-bottom-color: var(--border);
+      box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+    }
+
+    .nav-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 40px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-logo span {
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 4px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      background: var(--accent-light);
+    }
+
+    .nav-links a.active {
+      color: var(--text);
+      background: var(--accent-light);
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      color: var(--text);
+    }
+
+    .nav-toggle svg {
+      width: 20px;
+      height: 20px;
+      display: block;
+    }
+
+    /* --- Header --- */
+    header {
+      padding: calc(var(--nav-height) + 60px) 40px 60px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header .meta {
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    header h1 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+
+    header .subtitle {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 620px;
+      line-height: 1.6;
+    }
+
+    /* --- Sections --- */
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .section-block {
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+
+    h2 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      line-height: 1.3;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    p.muted {
+      color: var(--text-muted);
+    }
+
+    /* --- Quote Blocks --- */
+    .quote-block {
+      background: var(--quote-bg);
+      border-left: 3px solid var(--accent);
+      padding: 24px 28px;
+      margin: 28px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .quote-block .quote-text {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 19px;
+      line-height: 1.5;
+      font-weight: 400;
+      margin-bottom: 10px;
+    }
+
+    .quote-block .quote-attr {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* --- Theme Cards --- */
+    .themes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 28px;
+    }
+
+    .theme-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .theme-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+
+    .theme-card .theme-num {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      margin-bottom: 10px;
+    }
+
+    .theme-card h3 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .theme-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+
+    /* --- Process Steps --- */
+    .process-steps {
+      margin-top: 28px;
+    }
+
+    .step {
+      display: flex;
+      gap: 24px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .step:last-child { border-bottom: none; }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .step-content h3 {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .step-content p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 0;
+    }
+
+    /* --- Stats Row --- */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin: 28px 0;
+    }
+
+    .stat {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .stat:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+
+    .stat .number {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .stat .label {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* --- Comparison Table --- */
+    .comparison {
+      margin: 28px 0;
+      overflow-x: auto;
+    }
+
+    .comparison table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .comparison th {
+      text-align: left;
+      padding: 14px 16px;
+      background: var(--accent);
+      color: white;
+      font-weight: 500;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+    }
+
+    .comparison th:first-child { border-radius: 8px 0 0 0; }
+    .comparison th:last-child { border-radius: 0 8px 0 0; }
+
+    .comparison td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .comparison tr:last-child td { border-bottom: none; }
+
+    .comparison tr:nth-child(even) td {
+      background: var(--accent-light);
+    }
+
+    /* --- CTA / Next Steps --- */
+    .next-steps {
+      background: var(--accent);
+      color: white;
+      border-radius: 12px;
+      padding: 40px;
+      margin: 28px 0;
+    }
+
+    .next-steps h3 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 22px;
+      margin-bottom: 16px;
+    }
+
+    .next-steps p {
+      color: rgba(255,255,255,0.8);
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+
+    .next-steps ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .next-steps li {
+      padding: 8px 0;
+      padding-left: 20px;
+      position: relative;
+      color: rgba(255,255,255,0.85);
+      font-size: 15px;
+    }
+
+    .next-steps li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 16px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+    }
+
+    /* --- Scroll Animations --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger children */
+    .theme-card.reveal,
+    .stat.reveal,
+    .step.reveal {
+      transition-delay: calc(var(--i, 0) * 0.08s);
+    }
+
+    /* --- Back to Top --- */
+    .back-to-top {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.3s, transform 0.3s;
+      pointer-events: none;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .back-to-top:hover {
+      background: #444;
+    }
+
+    .back-to-top svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* --- Footer --- */
+    footer {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 40px 80px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    /* --- Mobile --- */
+    @media (max-width: 720px) {
+      .nav-inner { padding: 0 24px; }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: var(--nav-height);
+        left: 0;
+        right: 0;
+        background: rgba(250, 250, 248, 0.97);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        flex-direction: column;
+        padding: 12px 24px 20px;
+        border-bottom: 1px solid var(--border);
+        gap: 0;
+      }
+
+      .nav-links.open { display: flex; }
+
+      .nav-links a {
+        padding: 10px 12px;
+        font-size: 15px;
+      }
+
+      .nav-toggle { display: block; }
+
+      header, section, footer { padding-left: 24px; padding-right: 24px; }
+      .themes-grid { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: 1fr; }
+      .step { flex-direction: column; gap: 12px; }
+      footer { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Nav -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#top" class="nav-logo">Workhorse <span>&times; GoDoGood</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#premise">Premise</a></li>
+        <li><a href="#themes">Themes</a></li>
+        <li><a href="#quotes">Quotes</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#comparison">Compare</a></li>
+        <li><a href="#numbers">Numbers</a></li>
+        <li><a href="#opportunity">Opportunity</a></li>
+        <li><a href="#stack">Stack</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header id="top">
+    <div class="meta reveal">Workhorse &times; GoDoGood &mdash; March 23, 2026</div>
+    <h1 class="reveal">The Future of Web Design Is Agentic</h1>
+    <p class="subtitle reveal">A conversation between TJ Dhillon (Workhorse) and Rob Sulzer (GoDoGood) on how AI agents are reshaping how we build, maintain, and sell websites &mdash; and what it means for the design industry.</p>
+  </header>
+
+  <!-- THE PREMISE -->
+  <section id="premise">
+    <div class="section-block">
+      <div class="section-label reveal">The Premise</div>
+      <h2 class="reveal">The website industry is at an inflection point</h2>
+      <p class="reveal">For two decades, the cycle has been the same: a client needs a website, a team spends months designing and developing it in WordPress, and three years later everyone does it again. The tools have gotten better, but the fundamental model &mdash; designers hand off to developers, developers grind through code, clients wait &mdash; hasn't changed.</p>
+      <p class="reveal">Until now. The emergence of AI coding agents (like Claude Code) combined with headless CMS platforms (like Sanity) is collapsing the timeline from months to days, while actually improving the quality of the output. This isn't a theoretical future. It's happening right now.</p>
+
+      <div class="quote-block reveal">
+        <div class="quote-text">"We're not waiting on people coding. We're not. That's the elephant in the room."</div>
+        <div class="quote-attr">&mdash; Rob Sulzer, GoDoGood</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY THEMES -->
+  <section id="themes">
+    <div class="section-block">
+      <div class="section-label reveal">Key Themes</div>
+      <h2 class="reveal">What emerged from the conversation</h2>
+
+      <div class="themes-grid">
+        <div class="theme-card reveal" style="--i:0">
+          <div class="theme-num">01</div>
+          <h3>Speed, Not Price</h3>
+          <p>Clients aren't asking for cheaper websites. They're asking for faster ones. The bottleneck has always been development &mdash; waiting on code, waiting on revisions, waiting on QA. AI agents eliminate that bottleneck entirely.</p>
+        </div>
+        <div class="theme-card reveal" style="--i:1">
+          <div class="theme-num">02</div>
+          <h3>Open Source Ownership</h3>
+          <p>Clients &mdash; especially nonprofits &mdash; want to own their digital assets. Not rent them on Webflow. Not be locked into a proprietary platform. The new stack (Next.js + headless CMS) gives them a real, portable asset on their balance sheet.</p>
+        </div>
+        <div class="theme-card reveal" style="--i:2">
+          <div class="theme-num">03</div>
+          <h3>Design Is the Differentiator</h3>
+          <p>When anyone can generate code, the thing that separates great from generic is the design eye, the strategy, and the brand thinking. The purple-gradient AI aesthetic is already exhausting people. Taste wins.</p>
+        </div>
+        <div class="theme-card reveal" style="--i:3">
+          <div class="theme-num">04</div>
+          <h3>The Designer Becomes the Operator</h3>
+          <p>Instead of directing interns or managing developer handoffs, the designer orchestrates AI agents &mdash; assigning tasks, reviewing output, refining direction. Same creative leadership, radically different execution.</p>
+        </div>
+        <div class="theme-card reveal" style="--i:4">
+          <div class="theme-num">05</div>
+          <h3>Authenticity Is Coming Back</h3>
+          <p>Clients can already spot AI-generated content. The brands that win will be the ones that feel human, intentional, and authentic &mdash; which requires real strategic thinking, not just prompting.</p>
+        </div>
+        <div class="theme-card reveal" style="--i:5">
+          <div class="theme-num">06</div>
+          <h3>The Market Is Massive</h3>
+          <p>There are roughly 100,000+ qualifying nonprofits in the US alone, and at any given time 20% are actively looking to redo their website. That's 20,000 potential clients &mdash; many of whom are underserved by the current agency model.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTES -->
+  <section id="quotes">
+    <div class="section-block">
+      <div class="section-label reveal">In Their Words</div>
+      <h2 class="reveal">Key moments from the conversation</h2>
+
+      <div class="quote-block reveal">
+        <div class="quote-text">"Not even cheaper. They just want it done quicker. And I need it to look gorgeous. I need the strategy."</div>
+        <div class="quote-attr">&mdash; Rob Sulzer</div>
+      </div>
+
+      <div class="quote-block reveal">
+        <div class="quote-text">"The most qualified to make a website for a company is probably the company themselves. They know the subject matter. They're the better experts in their own work. They just don't know the technology."</div>
+        <div class="quote-attr">&mdash; TJ Dhillon</div>
+      </div>
+
+      <div class="quote-block reveal">
+        <div class="quote-text">"You're going to coordinate agents that are going to do this for you. That's going to save your career as a creative director, as a strategist. Instead of directing interns, you're directing agents within these platforms."</div>
+        <div class="quote-attr">&mdash; Rob Sulzer</div>
+      </div>
+
+      <div class="quote-block reveal">
+        <div class="quote-text">"This took me like a day and a half to build. Total hours combined, probably like 10 hours. And most of it wasn't actually working Claude Code &mdash; it was the conversations, the strategy."</div>
+        <div class="quote-attr">&mdash; TJ Dhillon, on building a complete portfolio site with CMS</div>
+      </div>
+
+      <div class="quote-block reveal">
+        <div class="quote-text">"Whoever has the brand is going to win. Authenticity, the experience with your product or service, the look, the feel &mdash; that's what's going to survive."</div>
+        <div class="quote-attr">&mdash; Rob Sulzer</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE PROCESS -->
+  <section id="process">
+    <div class="section-block">
+      <div class="section-label reveal">The Process</div>
+      <h2 class="reveal">How agentic web design works</h2>
+      <p class="muted reveal">This is the emerging workflow &mdash; a designer-led, AI-powered process that collapses the traditional agency timeline while keeping strategy and brand at the center.</p>
+
+      <div class="process-steps">
+        <div class="step reveal" style="--i:0">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h3>Discovery &amp; Kickoff</h3>
+            <p>One 45-minute meeting with the client. Gather the brand story, goals, audience, tone, and visual direction. This is where the human insight happens &mdash; understanding what the client actually needs versus what they think they need.</p>
+          </div>
+        </div>
+        <div class="step reveal" style="--i:1">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h3>AI-Assisted Research &amp; Direction</h3>
+            <p>Use AI tools (ChatGPT for planning, Claude for execution) to research visual direction, generate mood concepts, and draft content from the conversation. Feed style references and brand guidelines as prompts. This replaces weeks of mood boarding with hours of iteration.</p>
+          </div>
+        </div>
+        <div class="step reveal" style="--i:2">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h3>Design Concept &amp; Client Review</h3>
+            <p>Present a design direction based on the research. This can be a single well-designed page &mdash; the AI agents will extrapolate the system from there. One more 45-minute meeting to align on the look and feel.</p>
+          </div>
+        </div>
+        <div class="step reveal" style="--i:3">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h3>Agentic Development</h3>
+            <p>Deploy Claude Code to build the full site &mdash; front-end pages, responsive design, animations, and a complete headless CMS backend (Sanity). The AI builds the content management system alongside the site, so the client gets both the storefront and the keys.</p>
+          </div>
+        </div>
+        <div class="step reveal" style="--i:4">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <h3>QA, Security &amp; Handoff</h3>
+            <p>Run automated security checks, test the CMS interface, verify responsive behavior. The client gets a web-based editor (similar to WordPress) where they can log in, edit content, and manage their site &mdash; no code required. Everything is open source and fully owned.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON -->
+  <section id="comparison">
+    <div class="section-block">
+      <div class="section-label reveal">Old vs. New</div>
+      <h2 class="reveal">What changes &mdash; and what doesn't</h2>
+
+      <div class="comparison reveal">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Traditional Agency Model</th>
+              <th>Agentic Web Design</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Timeline</strong></td>
+              <td>8&ndash;16 weeks</td>
+              <td>1&ndash;3 weeks</td>
+            </tr>
+            <tr>
+              <td><strong>Dev Bottleneck</strong></td>
+              <td>Waiting on developers for every change</td>
+              <td>AI agents build in real-time</td>
+            </tr>
+            <tr>
+              <td><strong>Platform</strong></td>
+              <td>WordPress (legacy plugins, bloat)</td>
+              <td>Next.js + Headless CMS (lean, modern)</td>
+            </tr>
+            <tr>
+              <td><strong>Ownership</strong></td>
+              <td>Open source (WordPress) or rented (Webflow)</td>
+              <td>Fully open source, client-owned asset</td>
+            </tr>
+            <tr>
+              <td><strong>Client CMS</strong></td>
+              <td>WordPress admin (complex)</td>
+              <td>Sanity Studio (clean, purpose-built)</td>
+            </tr>
+            <tr>
+              <td><strong>Design Quality</strong></td>
+              <td>Limited by dev time and budget</td>
+              <td>Design-led &mdash; build what you envision</td>
+            </tr>
+            <tr>
+              <td><strong>Strategy</strong></td>
+              <td>Same as always</td>
+              <td>Same as always &mdash; this doesn't change</td>
+            </tr>
+            <tr>
+              <td><strong>Brand Thinking</strong></td>
+              <td>Same as always</td>
+              <td>Same as always &mdash; this doesn't change</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- BY THE NUMBERS -->
+  <section id="numbers">
+    <div class="section-block">
+      <div class="section-label reveal">By the Numbers</div>
+      <h2 class="reveal">The case in context</h2>
+
+      <div class="stats-row">
+        <div class="stat reveal" style="--i:0">
+          <div class="number">10 hrs</div>
+          <div class="label">To build a complete portfolio site with CMS, from two meetings</div>
+        </div>
+        <div class="stat reveal" style="--i:1">
+          <div class="number">20K</div>
+          <div class="label">US nonprofits actively looking to redo their website at any given time</div>
+        </div>
+        <div class="stat reveal" style="--i:2">
+          <div class="number">10x</div>
+          <div class="label">Output increase reported by dev teams using AI agents vs. traditional coding</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE OPPORTUNITY -->
+  <section id="opportunity">
+    <div class="section-block">
+      <div class="section-label reveal">The Opportunity</div>
+      <h2 class="reveal">Where Workhorse + GoDoGood fit</h2>
+      <p class="reveal">GoDoGood has the client relationships, the brand strategy expertise, and the nonprofit market knowledge. Workhorse has the design eye and the agentic development capability. Together, the model looks like this:</p>
+
+      <p class="reveal"><strong>GoDoGood</strong> handles brand strategy, client relationships, and ongoing retainer work (campaigns, social, email, impact reports). <strong>Workhorse</strong> handles UI/UX design and agentic development &mdash; turning brand direction into a live, open-source website in days instead of months.</p>
+
+      <p class="reveal">The entry point is the $7,500&ndash;$15,000 website + brand refresh &mdash; the sweet spot where traditional agencies either turn clients away or stick them in a WordPress queue. With agentic development, this becomes a fast, high-quality, profitable engagement that opens the door to ongoing work.</p>
+
+      <div class="next-steps reveal">
+        <h3>Immediate Next Steps</h3>
+        <ul>
+          <li>TJ to document the agentic web design process and create sales-ready materials</li>
+          <li>Build a landing page on the Workhorse site showcasing this offering</li>
+          <li>Rob to identify 2&ndash;3 smaller clients as pilot projects</li>
+          <li>Schedule an intro call with the GoDoGood team once materials are ready</li>
+          <li>Rob and Michelle to visit the Workhorse office in DC in the coming weeks</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH STACK -->
+  <section id="stack">
+    <div class="section-block">
+      <div class="section-label reveal">Under the Hood</div>
+      <h2 class="reveal">The technology stack</h2>
+      <p class="muted reveal">For the technically curious &mdash; this is what's powering agentic web design today.</p>
+
+      <div class="themes-grid">
+        <div class="theme-card reveal" style="--i:0">
+          <h3>Claude Code</h3>
+          <p>Anthropic's AI coding agent. Writes production-quality front-end and back-end code from natural language prompts. Spawns multiple agents for parallel development.</p>
+        </div>
+        <div class="theme-card reveal" style="--i:1">
+          <h3>Sanity (Headless CMS)</h3>
+          <p>A modern, open-source content management system. Provides a clean editor interface for clients &mdash; similar to WordPress admin, but built specifically for the content on their site.</p>
+        </div>
+        <div class="theme-card reveal" style="--i:2">
+          <h3>Next.js / React</h3>
+          <p>The front-end framework. Industry standard, open source, used by the biggest companies in the world. Fast, accessible, and fully owned by the client.</p>
+        </div>
+        <div class="theme-card reveal" style="--i:3">
+          <h3>GitHub + Standard Hosting</h3>
+          <p>Code lives in a repository the client owns. Hosted on the same infrastructure as any WordPress site &mdash; Vercel, Netlify, or a traditional server. Nothing exotic.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>Workhorse &times; GoDoGood &mdash; March 2026</div>
+    <div>Conversation documented and site generated with AI assistance</div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <script>
+    // --- Scroll-spy: highlight active nav link ---
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const navbar = document.getElementById('navbar');
+    const backToTop = document.getElementById('backToTop');
+
+    function updateScrollSpy() {
+      const scrollY = window.scrollY + 120;
+
+      sections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        const id = section.getAttribute('id');
+
+        if (scrollY >= top && scrollY < top + height) {
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + id) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+
+      // Nav shadow
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+
+      // Back to top
+      backToTop.classList.toggle('visible', window.scrollY > 500);
+    }
+
+    window.addEventListener('scroll', updateScrollSpy, { passive: true });
+    updateScrollSpy();
+
+    // --- Back to top ---
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // --- Mobile nav toggle ---
+    const navToggle = document.getElementById('navToggle');
+    const navLinksEl = document.getElementById('navLinks');
+
+    navToggle.addEventListener('click', () => {
+      navLinksEl.classList.toggle('open');
+    });
+
+    // Close mobile nav on link click
+    navLinksEl.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinksEl.classList.remove('open');
+      });
+    });
+
+    // --- Scroll reveal animations ---
+    const revealElements = document.querySelectorAll('.reveal');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealElements.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
