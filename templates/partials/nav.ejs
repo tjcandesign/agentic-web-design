@@ -3,15 +3,19 @@
     <a href="<%= page === 'index' ? '#top' : 'index.html' %>" class="nav-logo"><%- site.nav.logo %> <span>&times; <%- site.nav.logoSuffix %></span></a>
     <ul class="nav-links" id="navLinks">
 <% if (page === 'index') { %>
-      <li><a href="conversation-2.html">Follow-Up</a></li>
+      <li><a href="index.html" class="active">Conversation 1</a></li>
+      <li><a href="conversation-2.html">Conversation 2</a></li>
+      <li><a href="conversation-3.html">Conversation 3</a></li>
       <li><a href="process.html">Full System</a></li>
 <% } else if (page === 'process') { %>
-      <li><a href="index.html">Conversation</a></li>
-      <li><a href="conversation-2.html">Follow-Up</a></li>
-      <li><a href="process.html" class="active">Process</a></li>
+      <li><a href="index.html">Conversation 1</a></li>
+      <li><a href="conversation-2.html">Conversation 2</a></li>
+      <li><a href="conversation-3.html">Conversation 3</a></li>
+      <li><a href="process.html" class="active">Full System</a></li>
 <% } else { %>
-      <li><a href="index.html">Conversation</a></li>
-      <li><a href="conversation-2.html" class="<%= page === 'conversation-2' ? 'active' : '' %>">Follow-Up</a></li>
+      <li><a href="index.html">Conversation 1</a></li>
+      <li><a href="conversation-2.html" class="<%= page === 'conversation-2' ? 'active' : '' %>">Conversation 2</a></li>
+      <li><a href="conversation-3.html" class="<%= page === 'conversation-3' ? 'active' : '' %>">Conversation 3</a></li>
       <li><a href="process.html">Full System</a></li>
 <% } %>
     </ul>
