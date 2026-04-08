@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= content.meta.title %></title>
+  <meta name="description" content="<%= content.meta.description %>">
+  <meta property="og:title" content="<%= content.meta.ogTitle %>">
+  <meta property="og:description" content="<%= content.meta.ogDescription %>">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◆</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FAFAF8;
+      --text: #1A1A1A;
+      --text-muted: #6B6B6B;
+      --accent: #2C2C2C;
+      --accent-light: #F0EFED;
+      --border: #E5E4E1;
+      --quote-bg: #F5F4F1;
+      --nav-height: 56px;
+      --blue: #3B82F6;
+      --blue-light: #EFF6FF;
+      --green: #22C55E;
+      --green-light: #F0FDF4;
+      --amber: #F59E0B;
+      --amber-light: #FFFBEB;
+      --rose: #F43F5E;
+      --rose-light: #FFF1F2;
+      --violet: #8B5CF6;
+      --violet-light: #F5F3FF;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: var(--nav-height); }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* --- Nav --- */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(250, 250, 248, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      height: var(--nav-height);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    nav.scrolled {
+      border-bottom-color: var(--border);
+      box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+    }
+    .nav-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 40px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-weight: 700; font-size: 14px; letter-spacing: -0.01em;
+      color: var(--text); text-decoration: none;
+    }
+    .nav-logo span { color: var(--text-muted); font-weight: 400; }
+    .nav-links { display: flex; gap: 4px; list-style: none; }
+    .nav-links a {
+      font-size: 13px; font-weight: 500; color: var(--text-muted);
+      text-decoration: none; padding: 6px 12px; border-radius: 6px;
+      transition: color 0.2s, background 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); background: var(--accent-light); }
+    .nav-toggle {
+      display: none; background: none; border: none; cursor: pointer; padding: 8px; color: var(--text);
+    }
+    .nav-toggle svg { width: 20px; height: 20px; display: block; }
+
+    /* --- Layout --- */
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 40px; }
+    .section-block { padding: 60px 0; border-top: 1px solid var(--border); }
+    .section-label {
+      font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 16px; font-weight: 500;
+    }
+    h1 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 20px;
+    }
+    h2 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 28px; font-weight: 600; margin-bottom: 20px; line-height: 1.3;
+    }
+    h3 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 20px; font-weight: 600; margin-bottom: 10px;
+    }
+    p { font-size: 16px; margin-bottom: 16px; }
+    p.muted { color: var(--text-muted); }
+    .subtitle { font-size: 18px; color: var(--text-muted); max-width: 700px; line-height: 1.6; }
+
+    /* --- Header --- */
+    header {
+      padding: calc(var(--nav-height) + 60px) 40px 60px;
+      max-width: 1000px; margin: 0 auto;
+    }
+    header .meta {
+      font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 24px;
+    }
+
+    /* --- 3-Layer System Visual --- */
+    .layers-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin: 32px 0;
+    }
+    .layer-row {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      position: relative;
+    }
+    .layer-indicator {
+      width: 56px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .layer-dot {
+      width: 14px; height: 14px; border-radius: 50%; z-index: 2;
+      border: 3px solid white;
+      box-shadow: 0 0 0 2px var(--border);
+    }
+    .layer-line {
+      position: absolute;
+      width: 2px; background: var(--border);
+      top: 0; bottom: 0; left: 50%; transform: translateX(-50%);
+    }
+    .layer-row:first-child .layer-line { top: 50%; }
+    .layer-row:last-child .layer-line { bottom: 50%; }
+    .layer-card {
+      flex: 1;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin: 6px 0;
+      background: white;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .layer-card:hover {
+      transform: translateX(4px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .layer-card .layer-tag {
+      display: inline-block;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 4px; margin-bottom: 10px;
+    }
+    .layer-card h3 { margin-bottom: 6px; }
+    .layer-card p { font-size: 14px; color: var(--text-muted); margin-bottom: 0; }
+    .layer-human .layer-dot { background: var(--blue); box-shadow: 0 0 0 2px var(--blue); }
+    .layer-human .layer-tag { background: var(--blue-light); color: var(--blue); }
+    .layer-ai .layer-dot { background: var(--violet); box-shadow: 0 0 0 2px var(--violet); }
+    .layer-ai .layer-tag { background: var(--violet-light); color: var(--violet); }
+    .layer-llm .layer-dot { background: var(--green); box-shadow: 0 0 0 2px var(--green); }
+    .layer-llm .layer-tag { background: var(--green-light); color: var(--green); }
+
+    /* --- Tool Stack Grid --- */
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin: 28px 0;
+    }
+    .tool-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .tool-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .tool-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .tool-card.tc-research::before { background: var(--blue); }
+    .tool-card.tc-copy::before { background: var(--amber); }
+    .tool-card.tc-design::before { background: var(--violet); }
+    .tool-card.tc-build::before { background: var(--green); }
+    .tool-card.tc-content::before { background: var(--rose); }
+    .tool-category {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; margin-bottom: 8px;
+    }
+    .tc-research .tool-category { color: var(--blue); }
+    .tc-copy .tool-category { color: var(--amber); }
+    .tc-design .tool-category { color: var(--violet); }
+    .tc-build .tool-category { color: var(--green); }
+    .tc-content .tool-category { color: var(--rose); }
+    .tool-card .tool-name {
+      font-weight: 700; font-size: 17px; margin-bottom: 6px;
+    }
+    .tool-card .tool-desc {
+      font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 0;
+    }
+    .tool-arrow {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-muted); font-size: 13px;
+    }
+
+    /* --- Pipeline Flow Visual --- */
+    .pipeline-flow {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin: 36px 0;
+      overflow-x: auto;
+      padding: 16px 0;
+    }
+    .pipeline-node {
+      flex-shrink: 0;
+      background: var(--accent);
+      color: white;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      text-align: center;
+      min-width: 90px;
+      transition: transform 0.2s;
+    }
+    .pipeline-node:hover { transform: scale(1.05); }
+    .pipeline-arrow {
+      flex-shrink: 0;
+      width: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 16px;
+    }
+    .pipeline-arrow svg { width: 20px; height: 20px; }
+
+    /* --- 10-Step Process --- */
+    .process-timeline {
+      margin: 32px 0;
+      position: relative;
+    }
+    .process-step {
+      display: flex;
+      gap: 24px;
+      position: relative;
+      padding-bottom: 40px;
+    }
+    .process-step:last-child { padding-bottom: 0; }
+    .step-left {
+      flex-shrink: 0;
+      width: 52px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .step-badge {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; font-weight: 700; color: white; z-index: 2;
+      flex-shrink: 0;
+    }
+    .step-connector {
+      flex: 1;
+      width: 2px;
+      background: var(--border);
+      margin-top: 4px;
+    }
+    .process-step:last-child .step-connector { display: none; }
+    .step-right {
+      flex: 1;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 28px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .step-right:hover {
+      transform: translateX(4px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .step-right h3 { font-size: 18px; margin-bottom: 4px; }
+    .step-tool {
+      display: inline-block;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
+      padding: 2px 8px; border-radius: 4px; margin-bottom: 10px;
+    }
+    .step-right p { font-size: 14px; color: var(--text-muted); margin-bottom: 8px; }
+    .step-right p:last-child { margin-bottom: 0; }
+    .step-outputs {
+      display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px;
+    }
+    .step-output-tag {
+      font-size: 12px; padding: 3px 10px; border-radius: 5px;
+      background: var(--accent-light); color: var(--text-muted); font-weight: 500;
+    }
+    .step-callout {
+      margin-top: 12px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+    .callout-insight {
+      background: var(--blue-light); color: var(--blue);
+      border: 1px solid rgba(59, 130, 246, 0.15);
+    }
+    .callout-warning {
+      background: var(--amber-light); color: #92400E;
+      border: 1px solid rgba(245, 158, 11, 0.15);
+    }
+    .callout-key {
+      background: var(--green-light); color: #166534;
+      border: 1px solid rgba(34, 197, 94, 0.15);
+    }
+
+    /* Step colors */
+    .step-1 .step-badge { background: var(--blue); }
+    .step-1 .step-tool { background: var(--blue-light); color: var(--blue); }
+    .step-2 .step-badge { background: var(--amber); }
+    .step-2 .step-tool { background: var(--amber-light); color: #92400E; }
+    .step-3 .step-badge { background: var(--violet); }
+    .step-3 .step-tool { background: var(--violet-light); color: var(--violet); }
+    .step-4 .step-badge { background: var(--green); }
+    .step-4 .step-tool { background: var(--green-light); color: #166534; }
+    .step-5 .step-badge { background: var(--accent); }
+    .step-6 .step-badge { background: var(--amber); }
+    .step-6 .step-tool { background: var(--amber-light); color: #92400E; }
+    .step-7 .step-badge { background: var(--rose); }
+    .step-7 .step-tool { background: var(--rose-light); color: var(--rose); }
+    .step-8 .step-badge { background: var(--blue); }
+    .step-8 .step-tool { background: var(--blue-light); color: var(--blue); }
+    .step-9 .step-badge { background: var(--violet); }
+    .step-9 .step-tool { background: var(--violet-light); color: var(--violet); }
+    .step-10 .step-badge { background: var(--green); }
+    .step-10 .step-tool { background: var(--green-light); color: #166534; }
+
+    /* --- Pitfalls Section --- */
+    .pitfalls-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 28px 0;
+    }
+    .pitfall-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      border-top: 3px solid var(--rose);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .pitfall-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .pitfall-card .pitfall-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--rose); margin-bottom: 8px;
+    }
+    .pitfall-card h3 { margin-bottom: 12px; }
+    .pitfall-fix {
+      background: var(--green-light);
+      border: 1px solid rgba(34, 197, 94, 0.15);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 13px;
+      color: #166534;
+      font-weight: 500;
+    }
+    .pitfall-fix strong { font-weight: 700; }
+
+    /* --- Strategy Section --- */
+    .strategy-card {
+      background: var(--accent);
+      color: white;
+      border-radius: 12px;
+      padding: 40px;
+      margin: 28px 0;
+    }
+    .strategy-card h3 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 22px; margin-bottom: 16px; color: white;
+    }
+    .strategy-card p { color: rgba(255,255,255,0.8); font-size: 15px; }
+    .strategy-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 24px;
+    }
+    .strategy-col h4 {
+      font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(255,255,255,0.5); margin-bottom: 12px; font-weight: 600;
+    }
+    .strategy-col .reframe {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.5;
+      color: white;
+    }
+    .moat-list {
+      list-style: none; padding: 0;
+    }
+    .moat-list li {
+      padding: 6px 0;
+      padding-left: 20px;
+      position: relative;
+      color: rgba(255,255,255,0.85);
+      font-size: 15px;
+    }
+    .moat-list li::before {
+      content: '';
+      position: absolute; left: 0; top: 14px;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+    }
+
+    /* --- Code blocks --- */
+    .prompt-block {
+      background: #1a1a1a;
+      color: #e5e5e5;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin: 12px 0 0;
+      white-space: pre-wrap;
+    }
+
+    /* --- Scroll Animations --- */
+    .reveal {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal[style*="--i"] {
+      transition-delay: calc(var(--i, 0) * 0.08s);
+    }
+
+    /* --- Back to Top --- */
+    .back-to-top {
+      position: fixed; bottom: 32px; right: 32px;
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--accent); color: white; border: none;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      opacity: 0; transform: translateY(10px);
+      transition: opacity 0.3s, transform 0.3s;
+      pointer-events: none;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    }
+    .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .back-to-top:hover { background: #444; }
+    .back-to-top svg { width: 18px; height: 18px; }
+
+    /* --- Footer --- */
+    footer {
+      max-width: 1000px; margin: 0 auto;
+      padding: 40px 40px 80px; border-top: 1px solid var(--border);
+      font-size: 13px; color: var(--text-muted);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    footer a { color: var(--text); text-decoration: none; font-weight: 500; }
+
+    /* --- Mobile --- */
+    @media (max-width: 720px) {
+      .nav-inner { padding: 0 24px; }
+      .nav-links {
+        display: none; position: absolute; top: var(--nav-height);
+        left: 0; right: 0;
+        background: rgba(250, 250, 248, 0.97);
+        backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        flex-direction: column; padding: 12px 24px 20px;
+        border-bottom: 1px solid var(--border); gap: 0;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 10px 12px; font-size: 15px; }
+      .nav-toggle { display: block; }
+      header, .container, footer { padding-left: 24px; padding-right: 24px; }
+      .tool-grid { grid-template-columns: 1fr; }
+      .pitfalls-grid { grid-template-columns: 1fr; }
+      .strategy-columns { grid-template-columns: 1fr; gap: 24px; }
+      .pipeline-flow { gap: 0; }
+      .pipeline-node { padding: 8px 12px; font-size: 11px; min-width: 70px; }
+      .pipeline-arrow { width: 18px; }
+      .process-step { gap: 16px; }
+      .step-left { width: 44px; }
+      .layer-indicator { width: 40px; }
+      footer { flex-direction: column; gap: 12px; text-align: center; }
+    }
+    </style>
+</head>
+<body>
+  <%- include('partials/nav', { page, site }) %>
+
+  <header id="top">
+    <div class="meta reveal" data-content-path="process.header.dateline"><%- content.header.dateline %></div>
+    <h1 class="reveal" data-content-path="process.header.title"><%- content.header.title %></h1>
+    <p class="subtitle reveal" data-content-path="process.header.subtitle"><%- content.header.subtitle %></p>
+  </header>
+
+  <div class="container" id="philosophy">
+    <div class="section-block">
+      <div class="section-label reveal"><%- content.philosophy.label %></div>
+      <h2 class="reveal" data-content-path="process.philosophy.heading"><%- content.philosophy.heading %></h2>
+      <div class="layers-visual">
+<% content.philosophy.layers.forEach((layer, i) => { %>
+        <div class="layer-row <%- layer.cssClass %> reveal" style="--i:<%= i %>">
+          <div class="layer-indicator">
+            <div class="layer-line"></div>
+            <div class="layer-dot"></div>
+          </div>
+          <div class="layer-card">
+            <div class="layer-tag"><%- layer.tag %></div>
+            <h3 data-content-path="process.philosophy.layers[<%= i %>].title"><%- layer.title %></h3>
+            <p data-content-path="process.philosophy.layers[<%= i %>].description"><%- layer.description %></p>
+          </div>
+        </div>
+<% }) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" id="tools">
+    <div class="section-block">
+      <div class="section-label reveal"><%- content.tools.label %></div>
+      <h2 class="reveal" data-content-path="process.tools.heading"><%- content.tools.heading %></h2>
+      <div class="tool-grid">
+<% content.tools.cards.forEach((card, i) => { %>
+        <div class="tool-card <%- card.cssClass %> reveal" style="--i:<%= i %>">
+          <div class="tool-category"><%- card.category %></div>
+          <div class="tool-name" data-content-path="process.tools.cards[<%= i %>].name"><%- card.name %></div>
+          <p class="tool-desc" data-content-path="process.tools.cards[<%= i %>].description"><%- card.description %></p>
+        </div>
+<% }) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" id="flow">
+    <div class="section-block">
+      <div class="section-label reveal"><%- content.flow.label %></div>
+      <h2 class="reveal" data-content-path="process.flow.heading"><%- content.flow.heading %></h2>
+      <div class="pipeline-flow reveal">
+<% content.flow.nodes.forEach((node, i) => { %>
+        <div class="pipeline-node" data-content-path="process.flow.nodes[<%= i %>]"><%- node %></div>
+<% if (i < content.flow.nodes.length - 1) { %>
+        <div class="pipeline-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+<% } %>
+<% }) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" id="steps">
+    <div class="section-block">
+      <div class="section-label reveal"><%- content.steps.label %></div>
+      <h2 class="reveal" data-content-path="process.steps.heading"><%- content.steps.heading %></h2>
+      <p class="muted reveal" data-content-path="process.steps.intro"><%- content.steps.intro %></p>
+      <div class="process-timeline">
+<% content.steps.items.forEach((step, i) => { %>
+        <div class="process-step <%- step.cssClass %> reveal" style="--i:<%= i %>">
+          <div class="step-left">
+            <div class="step-badge"><%= step.number %></div>
+            <div class="step-connector"></div>
+          </div>
+          <div class="step-right">
+            <h3 data-content-path="process.steps.items[<%= i %>].title"><%- step.title %></h3>
+<% if (step.tool) { %>
+            <div class="step-tool"><%- step.tool %></div>
+<% } %>
+            <p data-content-path="process.steps.items[<%= i %>].description"><%- step.description %></p>
+<% if (step.promptBlock) { %>
+            <div class="prompt-block" data-content-path="process.steps.items[<%= i %>].promptBlock"><%- step.promptBlock %></div>
+<% } %>
+<% if (step.outputs && step.outputs.length > 0) { %>
+            <div class="step-outputs">
+<% step.outputs.forEach(output => { %>
+              <span class="step-output-tag"><%- output %></span>
+<% }) %>
+            </div>
+<% } %>
+<% if (step.callout) { %>
+            <div class="step-callout <%- step.callout.type %>" data-content-path="process.steps.items[<%= i %>].callout.text"><%- step.callout.text %></div>
+<% } %>
+          </div>
+        </div>
+<% }) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" id="pitfalls">
+    <div class="section-block">
+      <div class="section-label reveal"><%- content.pitfalls.label %></div>
+      <h2 class="reveal" data-content-path="process.pitfalls.heading"><%- content.pitfalls.heading %></h2>
+      <div class="pitfalls-grid">
+<% content.pitfalls.cards.forEach((card, i) => { %>
+        <div class="pitfall-card reveal" style="--i:<%= i %>">
+          <div class="pitfall-label"><%- card.label %></div>
+          <h3 data-content-path="process.pitfalls.cards[<%= i %>].title"><%- card.title %></h3>
+          <p style="font-size:14px;color:var(--text-muted);margin-bottom:16px;" data-content-path="process.pitfalls.cards[<%= i %>].description"><%- card.description %></p>
+          <div class="pitfall-fix" data-content-path="process.pitfalls.cards[<%= i %>].fix"><strong>Fix:</strong> <%- card.fix %></div>
+        </div>
+<% }) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" id="strategy">
+    <div class="section-block">
+      <div class="section-label reveal"><%- content.strategy.label %></div>
+      <h2 class="reveal" data-content-path="process.strategy.heading"><%- content.strategy.heading %></h2>
+<% content.strategy.cards.forEach((card, i) => { %>
+<% if (card.type === 'comparison') { %>
+      <div class="strategy-card reveal">
+        <h3 data-content-path="process.strategy.cards[<%= i %>].title"><%- card.title %></h3>
+        <div class="strategy-columns">
+          <div class="strategy-col">
+            <h4><%- card.leftLabel %></h4>
+            <p class="reframe" <% if (card.leftStrikethrough) { %>style="color: rgba(255,255,255,0.5); text-decoration: line-through;"<% } else { %>style="color: rgba(255,255,255,0.6); font-size: 15px;"<% } %> data-content-path="process.strategy.cards[<%= i %>].leftText"><%- card.leftText %></p>
+          </div>
+          <div class="strategy-col">
+            <h4><%- card.rightLabel %></h4>
+            <p <% if (card.leftStrikethrough) { %>class="reframe"<% } else { %>style="color: white; font-size: 15px; font-weight: 600;"<% } %> data-content-path="process.strategy.cards[<%= i %>].rightText"><%- card.rightText %></p>
+          </div>
+        </div>
+      </div>
+<% } else if (card.type === 'moat') { %>
+      <div class="strategy-card reveal">
+        <h3 data-content-path="process.strategy.cards[<%= i %>].title"><%- card.title %></h3>
+        <p data-content-path="process.strategy.cards[<%= i %>].intro"><%- card.intro %></p>
+        <ul class="moat-list">
+<% card.items.forEach((item, j) => { %>
+          <li data-content-path="process.strategy.cards[<%= i %>].items[<%= j %>]"><%- item %></li>
+<% }) %>
+        </ul>
+      </div>
+<% } %>
+<% }) %>
+    </div>
+  </div>
+
+  <%- include('partials/footer', { page, site, content }) %>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+  <script>
+    const navbar = document.getElementById('navbar');
+    const backToTop = document.getElementById('backToTop');
+
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+      backToTop.classList.toggle('visible', window.scrollY > 500);
+    }, { passive: true });
+
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Mobile nav
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(link =>
+      link.addEventListener('click', () => navLinks.classList.remove('open'))
+    );
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>

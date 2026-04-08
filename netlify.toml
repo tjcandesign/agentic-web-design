@@ -1,0 +1,8 @@
+[build]
+  command = "node build.mjs && mkdir -p dist && cp index.html process.html conversation-2.html conversation-3.html dist/ && cp -r content admin dist/"
+  publish = "dist"
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+  included_files = ["templates/**"]

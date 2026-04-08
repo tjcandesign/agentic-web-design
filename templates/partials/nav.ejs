@@ -1,0 +1,22 @@
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="<%= page === 'index' ? '#top' : 'index.html' %>" class="nav-logo"><%- site.nav.logo %> <span>&times; <%- site.nav.logoSuffix %></span></a>
+    <ul class="nav-links" id="navLinks">
+<% if (page === 'index') { %>
+      <li><a href="conversation-2.html">Follow-Up</a></li>
+      <li><a href="process.html">Full System</a></li>
+<% } else if (page === 'process') { %>
+      <li><a href="index.html">Conversation</a></li>
+      <li><a href="conversation-2.html">Follow-Up</a></li>
+      <li><a href="process.html" class="active">Process</a></li>
+<% } else { %>
+      <li><a href="index.html">Conversation</a></li>
+      <li><a href="conversation-2.html" class="<%= page === 'conversation-2' ? 'active' : '' %>">Follow-Up</a></li>
+      <li><a href="process.html">Full System</a></li>
+<% } %>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>

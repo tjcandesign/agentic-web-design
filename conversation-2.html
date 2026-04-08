@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Follow-Up: From Concept to Client Pipeline &mdash; Agentic Web Design</title>
+  <meta name="description" content="A follow-up conversation between TJ Cichecki and Rob Sulzer on turning agentic web design into a repeatable client service for nonprofits.">
+  <meta property="og:title" content="Follow-Up: From Concept to Client Pipeline">
+  <meta property="og:description" content="Day two. The system works. Now how do we operationalize it?">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◆</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FAFAF8;
+      --text: #1A1A1A;
+      --text-muted: #6B6B6B;
+      --accent: #2C2C2C;
+      --accent-light: #F0EFED;
+      --border: #E5E4E1;
+      --highlight: #E8E6E1;
+      --quote-bg: #F5F4F1;
+      --nav-height: 56px;
+      --green: #22c55e;
+      --green-light: #f0fdf4;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: var(--nav-height); }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* --- Nav --- */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(250, 250, 248, 0.85);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      height: var(--nav-height);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    nav.scrolled { border-bottom-color: var(--border); box-shadow: 0 1px 8px rgba(0,0,0,0.04); }
+    .nav-inner {
+      max-width: 900px; margin: 0 auto; padding: 0 40px;
+      height: 100%; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-weight: 700; font-size: 14px; letter-spacing: -0.01em; color: var(--text); text-decoration: none; }
+    .nav-logo span { color: var(--text-muted); font-weight: 400; }
+    .nav-links { display: flex; align-items: center; gap: 24px; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--text); font-weight: 600; }
+
+    /* --- Header --- */
+    header {
+      max-width: 900px; margin: 0 auto; padding: 120px 40px 60px;
+    }
+    .meta { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 20px; }
+    header h1 {
+      font-family: 'Fraunces', serif; font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 600; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 20px;
+    }
+    header .subtitle { font-size: 1.1rem; color: var(--text-muted); line-height: 1.6; max-width: 640px; margin-bottom: 20px; }
+    header .back-link { font-size: 14px; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    header .back-link:hover { color: var(--text); }
+
+    /* --- Sections --- */
+    .content { max-width: 900px; margin: 0 auto; padding: 0 40px; }
+    section { padding: 60px 0; border-top: 1px solid var(--border); }
+    .section-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+      color: var(--text-muted); text-transform: uppercase; margin-bottom: 12px;
+    }
+    .section-heading {
+      font-family: 'Fraunces', serif; font-size: clamp(1.6rem, 3vw, 2rem);
+      font-weight: 600; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 32px;
+    }
+
+    /* --- Recap Stats --- */
+    .recap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .recap-card {
+      background: var(--green-light); border: 1px solid #bbf7d0;
+      border-radius: 12px; padding: 24px;
+    }
+    .recap-card .stat { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 700; color: #16a34a; margin-bottom: 4px; }
+    .recap-card .stat-text { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
+
+    /* --- Theme Cards --- */
+    .theme-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .theme-card {
+      background: white; border: 1px solid var(--border); border-radius: 12px;
+      padding: 28px; transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .theme-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+    .theme-card .num { font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; }
+    .theme-card h3 { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 600; margin-bottom: 10px; line-height: 1.3; }
+    .theme-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+    /* --- Quotes --- */
+    .quote-block {
+      background: var(--quote-bg); border-left: 3px solid var(--accent);
+      padding: 28px 32px; border-radius: 0 12px 12px 0; margin: 40px 0;
+    }
+    .quote-block blockquote {
+      font-family: 'Fraunces', serif; font-size: 1.15rem;
+      font-weight: 400; line-height: 1.6; font-style: italic; margin-bottom: 12px;
+    }
+    .quote-block .attribution { font-size: 13px; color: var(--text-muted); }
+    .quote-block .attribution strong { font-weight: 600; color: var(--text); }
+    .quote-block .context { font-size: 12px; color: var(--text-muted); margin-top: 4px; font-style: italic; }
+
+    /* --- Live Demo Features --- */
+    .demo-description { font-size: 1rem; color: var(--text-muted); line-height: 1.7; max-width: 680px; margin-bottom: 32px; }
+    .feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .feature-card {
+      background: #1a1a1a; color: white; border-radius: 12px; padding: 28px;
+    }
+    .feature-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+    .feature-card p { font-size: 14px; color: #aaa; line-height: 1.6; }
+
+    /* --- Pipeline Steps --- */
+    .pipeline-list { display: flex; flex-direction: column; gap: 0; }
+    .pipeline-step {
+      display: grid; grid-template-columns: 60px 1fr; gap: 20px;
+      padding: 28px 0; border-bottom: 1px solid var(--border);
+    }
+    .pipeline-step:last-child { border-bottom: none; }
+    .pipeline-step .step-num {
+      font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 700;
+      color: var(--text-muted); padding-top: 2px;
+    }
+    .pipeline-step h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
+    .pipeline-step p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+    /* --- Market Stats --- */
+    .market-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 28px; }
+    .market-stat {
+      text-align: center; padding: 24px 16px;
+      background: white; border: 1px solid var(--border); border-radius: 12px;
+    }
+    .market-stat .val { font-family: 'Fraunces', serif; font-size: 1.8rem; font-weight: 700; margin-bottom: 4px; }
+    .market-stat .lbl { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+    .market-insight {
+      font-size: 1rem; color: var(--text-muted); line-height: 1.7;
+      max-width: 680px; padding: 20px 24px; background: var(--accent-light); border-radius: 10px;
+    }
+
+    /* --- WordPress Points --- */
+    .wp-points { display: flex; flex-direction: column; gap: 20px; }
+    .wp-point { padding: 24px; background: white; border: 1px solid var(--border); border-radius: 12px; }
+    .wp-point h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
+    .wp-point p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+    /* --- Scaling Phases --- */
+    .phase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .phase-card {
+      background: white; border: 1px solid var(--border); border-radius: 12px;
+      padding: 28px; display: flex; flex-direction: column;
+    }
+    .phase-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+      color: var(--green); text-transform: uppercase; margin-bottom: 6px;
+    }
+    .phase-card h3 { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 600; margin-bottom: 14px; }
+    .phase-card ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .phase-card li { font-size: 13px; color: var(--text-muted); line-height: 1.5; padding-left: 16px; position: relative; }
+    .phase-card li::before { content: ''; position: absolute; left: 0; top: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--border); }
+
+    /* --- Ideas --- */
+    .ideas-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .idea-card {
+      background: white; border: 1px solid var(--border); border-radius: 12px;
+      padding: 24px; transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .idea-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+    .idea-tag {
+      display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 3px 8px; border-radius: 4px;
+      background: var(--accent-light); color: var(--text-muted); margin-bottom: 10px;
+    }
+    .idea-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+    .idea-card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+    /* --- Next Steps --- */
+    .next-steps-list { display: flex; flex-direction: column; gap: 12px; }
+    .next-step {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 14px 18px; background: white; border: 1px solid var(--border); border-radius: 10px;
+    }
+    .next-step .check { flex-shrink: 0; width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 50%; margin-top: 1px; }
+    .next-step span { font-size: 14px; color: var(--text); line-height: 1.5; }
+
+    /* --- Footer --- */
+    footer {
+      max-width: 900px; margin: 0 auto; padding: 60px 40px;
+      border-top: 1px solid var(--border); text-align: center;
+    }
+    footer p { font-size: 13px; color: var(--text-muted); }
+    footer a { color: var(--text); text-decoration: none; font-weight: 500; }
+    footer a:hover { text-decoration: underline; }
+
+    /* --- Reveal Animation --- */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* --- Back to Top --- */
+    .back-to-top {
+      position: fixed; bottom: 32px; right: 32px; width: 40px; height: 40px;
+      border-radius: 50%; background: var(--accent); color: white;
+      border: none; cursor: pointer; font-size: 18px; display: flex;
+      align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    }
+    .back-to-top.visible { opacity: 1; pointer-events: auto; }
+
+    /* --- Responsive --- */
+    @media (max-width: 768px) {
+      header, .content { padding-left: 20px; padding-right: 20px; }
+      footer { padding-left: 20px; padding-right: 20px; }
+      .recap-grid { grid-template-columns: 1fr; }
+      .theme-grid { grid-template-columns: 1fr; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .market-stats { grid-template-columns: repeat(2, 1fr); }
+      .phase-grid { grid-template-columns: 1fr; }
+      .ideas-grid { grid-template-columns: 1fr; }
+      .pipeline-step { grid-template-columns: 40px 1fr; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="/index.html" class="nav-logo">Workhorse <span>&times; GoDoGood</span></a>
+      <div class="nav-links">
+        <a href="/index.html">Conversation 1</a>
+        <a href="/conversation-2.html" class="active">Conversation 2</a>
+        <a href="/conversation-3.html">Conversation 3</a>
+        <a href="/process.html">Full System</a>
+      </div>
+    </div>
+  </nav>
+
+  <header id="top">
+    <div class="meta reveal" data-content-path="conversation-2.header.dateline">WORKHORSE &times; GODOGOOD &mdash; MARCH 24, 2026</div>
+    <h1 class="reveal" data-content-path="conversation-2.header.title">From Concept to Client Pipeline</h1>
+    <p class="subtitle reveal" data-content-path="conversation-2.header.subtitle">A follow-up conversation between TJ Cichecki (Workhorse) and Rob Sulzer (GoDoGood) on operationalizing agentic web design &mdash; from live demos to real nonprofit clients.</p>
+    <a href="/index.html" class="back-link reveal" data-content-path="conversation-2.header.linkText">Read the original conversation &rarr;</a>
+  </header>
+
+  <div class="content">
+
+    <!-- Recap -->
+    <section class="reveal">
+      <div class="section-label" data-content-path="conversation-2.recap.label">24 HOURS LATER</div>
+      <h2 class="section-heading" data-content-path="conversation-2.recap.heading">What happened since yesterday</h2>
+      <div class="recap-grid">
+        
+        <div class="recap-card" data-content-path="conversation-2.recap.items[0]">
+          <div class="stat">~30 min</div>
+          <div class="stat-text">Time to build the full process documentation site, deployed to a live server</div>
+        </div>
+        
+        <div class="recap-card" data-content-path="conversation-2.recap.items[1]">
+          <div class="stat">~1 hr</div>
+          <div class="stat-text">Time to build a working click-to-edit admin panel with live preview</div>
+        </div>
+        
+        <div class="recap-card" data-content-path="conversation-2.recap.items[2]">
+          <div class="stat">3</div>
+          <div class="stat-text">New inbound leads that came in overnight &mdash; all nonprofits needing websites</div>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- Themes -->
+    <section class="reveal">
+      <div class="section-label" data-content-path="conversation-2.themes.label">KEY THEMES</div>
+      <h2 class="section-heading" data-content-path="conversation-2.themes.heading">What emerged from Day 2</h2>
+      <div class="theme-grid">
+        
+        <div class="theme-card" data-content-path="conversation-2.themes.cards[0]">
+          <div class="num">01</div>
+          <h3>The CMS Is the Conversation</h3>
+          <p>TJ demoed the click-to-edit admin panel &mdash; hover over any element, click it, tell Claude what to change, and it updates live. No Sanity, no WordPress admin. The editing interface is a chat window.</p>
+        </div>
+        
+        <div class="theme-card" data-content-path="conversation-2.themes.cards[1]">
+          <div class="num">02</div>
+          <h3>Minimum Viable Brand</h3>
+          <p>Not every nonprofit needs a $30K brand overhaul. The concept of an MVB &mdash; minimum viable brand &mdash; gives clients a logo, a site, and enough visual identity to be credible. Build on it later.</p>
+        </div>
+        
+        <div class="theme-card" data-content-path="conversation-2.themes.cards[2]">
+          <div class="num">03</div>
+          <h3>The $5K&ndash;$10K Sweet Spot</h3>
+          <p>Small nonprofits with limited budgets are the entry point. One conversation, two to three days of build, deployed and done. The agentic model makes these profitable instead of loss leaders.</p>
+        </div>
+        
+        <div class="theme-card" data-content-path="conversation-2.themes.cards[3]">
+          <div class="num">04</div>
+          <h3>Gateway to Retainers</h3>
+          <p>Websites are the entry point, but the real value is ongoing: donor campaigns, social creative, annual reports, email newsletters. Get in the door with a site, stay for the mission.</p>
+        </div>
+        
+        <div class="theme-card" data-content-path="conversation-2.themes.cards[4]">
+          <div class="num">05</div>
+          <h3>Scale Through People, Not Code</h3>
+          <p>TJ innovates and builds the tools. Then onboards designers who execute using those tools. The creative director role shifts from production to system design and quality assurance.</p>
+        </div>
+        
+        <div class="theme-card" data-content-path="conversation-2.themes.cards[5]">
+          <div class="num">06</div>
+          <h3>Micro-Tools for Clients</h3>
+          <p>Beyond websites: branded social graphic generators, content calendar tools, asset management. Each client gets bespoke micro-tools built into their site that solve their specific operational problems.</p>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- Quotes -->
+    
+    <div class="quote-block reveal" data-content-path="conversation-2.quotes[0]">
+      <blockquote>&ldquo;From when we hung up to when you had this document &mdash; two hours later. It was just really impressive.&rdquo;</blockquote>
+      <div class="attribution">&mdash; <strong>Rob Sulzer</strong></div>
+      <div class="context">On the speed of the process documentation site</div>
+    </div>
+    
+    <div class="quote-block reveal" data-content-path="conversation-2.quotes[1]">
+      <blockquote>&ldquo;The point is to take the coding dev part out of it. It frees the creative, the designer, the strategist to sit and use that time on UI/UX and interacting with the client.&rdquo;</blockquote>
+      <div class="attribution">&mdash; <strong>Rob Sulzer</strong></div>
+      <div class="context">On what agentic design actually changes</div>
+    </div>
+    
+    <div class="quote-block reveal" data-content-path="conversation-2.quotes[2]">
+      <blockquote>&ldquo;We're not going to involve the whole team. You're going to interact with one person and he's going to build what you need. That's how we save you money.&rdquo;</blockquote>
+      <div class="attribution">&mdash; <strong>TJ Cichecki</strong></div>
+      <div class="context">On the pitch to budget-conscious nonprofits</div>
+    </div>
+    
+
+    <!-- Live Demo -->
+    <section class="reveal">
+      <div class="section-label" data-content-path="conversation-2.liveDemo.label">LIVE DEMO</div>
+      <h2 class="section-heading" data-content-path="conversation-2.liveDemo.heading">The admin panel in action</h2>
+      <p class="demo-description" data-content-path="conversation-2.liveDemo.description">During the call, TJ demonstrated the click-to-edit interface he built in roughly an hour. The system works: hover any content block to see its label, click to select it, describe your change in natural language, and Claude updates the site. No CMS login. No content models. No deploy pipeline. Just conversation.</p>
+      <div class="feature-grid">
+        
+        <div class="feature-card" data-content-path="conversation-2.liveDemo.features[0]">
+          <h3>Annotation Overlay</h3>
+          <p>Every content block has a hover tooltip showing its path. Click any element to reference it in the chat.</p>
+        </div>
+        
+        <div class="feature-card" data-content-path="conversation-2.liveDemo.features[1]">
+          <h3>Conversational Editing</h3>
+          <p>Type what you want changed in plain English. Claude reads the current content, makes the edit, and shows you old vs. new.</p>
+        </div>
+        
+        <div class="feature-card" data-content-path="conversation-2.liveDemo.features[2]">
+          <h3>One-Click Publish</h3>
+          <p>When you're happy with changes, hit Publish. The site rebuilds from templates and deploys to production in seconds.</p>
+        </div>
+        
+        <div class="feature-card" data-content-path="conversation-2.liveDemo.features[3]">
+          <h3>No External CMS</h3>
+          <p>Content lives in JSON files. The editing interface is a Netlify Function calling Claude. No Sanity subscription, no WordPress plugins, no vendor lock-in.</p>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- Pipeline -->
+    <section class="reveal">
+      <div class="section-label" data-content-path="conversation-2.pipeline.label">THE CLIENT PIPELINE</div>
+      <h2 class="section-heading" data-content-path="conversation-2.pipeline.heading">How a project flows</h2>
+      <div class="pipeline-list">
+        
+        <div class="pipeline-step" data-content-path="conversation-2.pipeline.steps[0]">
+          <div class="step-num">01</div>
+          <div>
+            <h3>Lead Comes In</h3>
+            <p>GoDoGood's biz dev team qualifies the lead. Budget, timeline, scope. Is this a $5K site refresh or a $30K capital campaign?</p>
+          </div>
+        </div>
+        
+        <div class="pipeline-step" data-content-path="conversation-2.pipeline.steps[1]">
+          <div class="step-num">02</div>
+          <div>
+            <h3>Rob Has the Honest Conversation</h3>
+            <p>Are they ignorable? Does their brand resonate? Is the real problem messaging, not design? This filters out projects that aren't ready.</p>
+          </div>
+        </div>
+        
+        <div class="pipeline-step" data-content-path="conversation-2.pipeline.steps[2]">
+          <div class="step-num">03</div>
+          <div>
+            <h3>Brief Handoff</h3>
+            <p>The qualifying call is recorded, transcribed, and processed into a brief. TJ gets the context without a separate debrief meeting.</p>
+          </div>
+        </div>
+        
+        <div class="pipeline-step" data-content-path="conversation-2.pipeline.steps[3]">
+          <div class="step-num">04</div>
+          <div>
+            <h3>TJ Builds End-to-End</h3>
+            <p>One conversation with the client. Capture requirements, brand direction, content. Then build: brand, site, and documentation. Days, not months.</p>
+          </div>
+        </div>
+        
+        <div class="pipeline-step" data-content-path="conversation-2.pipeline.steps[4]">
+          <div class="step-num">05</div>
+          <div>
+            <h3>Client Edits via Chat</h3>
+            <p>Revisions happen through the admin panel. Client says what they want changed. No back-and-forth email chains. No design review rounds.</p>
+          </div>
+        </div>
+        
+        <div class="pipeline-step" data-content-path="conversation-2.pipeline.steps[5]">
+          <div class="step-num">06</div>
+          <div>
+            <h3>Upsell to Ongoing</h3>
+            <p>The site is the gateway. Donor campaigns, annual reports, social strategy, email newsletters &mdash; the relationship expands from there.</p>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- Market -->
+    <section class="reveal">
+      <div class="section-label" data-content-path="conversation-2.market.label">THE MARKET</div>
+      <h2 class="section-heading" data-content-path="conversation-2.market.heading">Why nonprofits, why now</h2>
+      <div class="market-stats">
+        
+        <div class="market-stat" data-content-path="conversation-2.market.stats[0]">
+          <div class="val">~2M</div>
+          <div class="lbl">Registered nonprofits in the US</div>
+        </div>
+        
+        <div class="market-stat" data-content-path="conversation-2.market.stats[1]">
+          <div class="val">100&ndash;150K</div>
+          <div class="lbl">Doing $2M+ annually</div>
+        </div>
+        
+        <div class="market-stat" data-content-path="conversation-2.market.stats[2]">
+          <div class="val">1 in 5</div>
+          <div class="lbl">Actively seeking a new website</div>
+        </div>
+        
+        <div class="market-stat" data-content-path="conversation-2.market.stats[3]">
+          <div class="val">91%</div>
+          <div class="lbl">Under $1M &mdash; underserved by traditional agencies</div>
+        </div>
+        
+      </div>
+      <div class="market-insight" data-content-path="conversation-2.market.insight">Most nonprofits have a one-person marketing department trying to do everything. They can't afford a traditional agency's $30K website. But they can't afford to be ignorable either. The agentic model makes quality design accessible at their budget.</div>
+    </section>
+
+    <!-- WordPress -->
+    <section class="reveal">
+      <div class="section-label" data-content-path="conversation-2.wordpress.label">THE ELEPHANT IN THE ROOM</div>
+      <h2 class="section-heading" data-content-path="conversation-2.wordpress.heading">What about WordPress?</h2>
+      <div class="wp-points">
+        
+        <div class="wp-point" data-content-path="conversation-2.wordpress.points[0]">
+          <h3>WordPress isn't going away</h3>
+          <p>Some clients will always want WordPress. Their IT team requires it. Their webmaster knows it. That's fine &mdash; AI tools can accelerate WordPress builds too.</p>
+        </div>
+        
+        <div class="wp-point" data-content-path="conversation-2.wordpress.points[1]">
+          <h3>WordPress is adding AI features</h3>
+          <p>GoDoGood's paid media lead in South Africa confirmed they're experimenting with WordPress AI tools. The CMS landscape is shifting everywhere.</p>
+        </div>
+        
+        <div class="wp-point" data-content-path="conversation-2.wordpress.points[2]">
+          <h3>The agentic model is CMS-agnostic</h3>
+          <p>The real innovation isn't the output format. It's the process: one person, end-to-end, conversation-driven. Whether the output is static HTML, WordPress, or something else is secondary.</p>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- Scaling -->
+    <section class="reveal">
+      <div class="section-label" data-content-path="conversation-2.scaling.label">SCALING THE MODEL</div>
+      <h2 class="section-heading" data-content-path="conversation-2.scaling.heading">From one builder to a team</h2>
+      <div class="phase-grid">
+        
+        <div class="phase-card" data-content-path="conversation-2.scaling.phases[0]">
+          <div class="phase-label">Now</div>
+          <h3>Prove It</h3>
+          <ul>
+            
+            <li>TJ handles projects end-to-end</li>
+            
+            <li>Build the tooling and refine the process</li>
+            
+            <li>Document everything as you go</li>
+            
+            <li>First few client projects establish the pattern</li>
+            
+          </ul>
+        </div>
+        
+        <div class="phase-card" data-content-path="conversation-2.scaling.phases[1]">
+          <div class="phase-label">Next</div>
+          <h3>Onboard Designers</h3>
+          <ul>
+            
+            <li>Hire creative designers, not coders</li>
+            
+            <li>TJ onboards and trains on the agentic workflow</li>
+            
+            <li>Build a starter kit: software, tools, setup in one package</li>
+            
+            <li>Designers work under TJ at Workhorse</li>
+            
+          </ul>
+        </div>
+        
+        <div class="phase-card" data-content-path="conversation-2.scaling.phases[2]">
+          <div class="phase-label">Future</div>
+          <h3>TJ as Innovation Lead</h3>
+          <ul>
+            
+            <li>TJ focuses on R&D: new tools, new workflows, new capabilities</li>
+            
+            <li>Designers execute client work using the established system</li>
+            
+            <li>Monthly updates to the team on what's changed</li>
+            
+            <li>The role shifts from builder to system architect</li>
+            
+          </ul>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- Ideas -->
+    <section class="reveal">
+      <div class="section-label" data-content-path="conversation-2.ideas.label">NEW IDEAS</div>
+      <h2 class="section-heading" data-content-path="conversation-2.ideas.heading">What opened up in this conversation</h2>
+      <div class="ideas-grid">
+        
+        <div class="idea-card" data-content-path="conversation-2.ideas.items[0]">
+          <div class="idea-tag">Tool</div>
+          <h3>Social Graphic Generator</h3>
+          <p>Upload a logo, pull stock images, output branded graphics in four sizes for every platform. Built as a micro-tool on the client's own site.</p>
+        </div>
+        
+        <div class="idea-card" data-content-path="conversation-2.ideas.items[1]">
+          <div class="idea-tag">Workflow</div>
+          <h3>Figma MCP Integration</h3>
+          <p>Connect Claude Code to Figma directly. Build brand assets programmatically, output to a design file for human review and export.</p>
+        </div>
+        
+        <div class="idea-card" data-content-path="conversation-2.ideas.items[2]">
+          <div class="idea-tag">Concept</div>
+          <h3>Brand Guidelines on the Website</h3>
+          <p>Instead of a PDF brand guide, the guidelines live on the site itself. Colors, typography, usage rules &mdash; documented, versioned, always current.</p>
+        </div>
+        
+        <div class="idea-card" data-content-path="conversation-2.ideas.items[3]">
+          <div class="idea-tag">Service</div>
+          <h3>AI Upskilling for Nonprofits</h3>
+          <p>FedEx is training 40,000 employees on AI. Nonprofits need the same. The pitch: hire a consultant to teach your team, not to do the work for you.</p>
+        </div>
+        
+        <div class="idea-card" data-content-path="conversation-2.ideas.items[4]">
+          <div class="idea-tag">Tool</div>
+          <h3>Content Calendar Automation</h3>
+          <p>Connect a content calendar to branded templates. Draft posts automatically, route for human review, maintain visual consistency across all channels.</p>
+        </div>
+        
+        <div class="idea-card" data-content-path="conversation-2.ideas.items[5]">
+          <div class="idea-tag">Opportunity</div>
+          <h3>Meet at Base Camp Volume Play</h3>
+          <p>GoDoGood's campground/RV resort sister agency could feed five sites per week. Template-based, fast turnaround, low-touch.</p>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- Closing Quote -->
+    <div class="quote-block reveal" data-content-path="conversation-2.closingQuote">
+      <blockquote>&ldquo;I can edit the text from within the browser now without having to go back to Claude Code. The client could edit their website themselves. It just built the same thing as Sanity but in straight code.&rdquo;</blockquote>
+      <div class="attribution">&mdash; <strong>TJ Cichecki</strong></div>
+      <div class="context">Confirmed live during the call</div>
+    </div>
+
+    <!-- Next Steps -->
+    <section class="reveal">
+      <div class="section-label" data-content-path="conversation-2.nextSteps.label">NEXT STEPS</div>
+      <h2 class="section-heading" data-content-path="conversation-2.nextSteps.heading">What we agreed to do</h2>
+      <div class="next-steps-list">
+        
+        <div class="next-step" data-content-path="conversation-2.nextSteps.items[0]">
+          <div class="check"></div>
+          <span>Rob sends the first qualifying small nonprofit lead to TJ</span>
+        </div>
+        
+        <div class="next-step" data-content-path="conversation-2.nextSteps.items[1]">
+          <div class="check"></div>
+          <span>TJ handles the project end-to-end as a proof of concept</span>
+        </div>
+        
+        <div class="next-step" data-content-path="conversation-2.nextSteps.items[2]">
+          <div class="check"></div>
+          <span>Figure out pricing and compensation model together</span>
+        </div>
+        
+        <div class="next-step" data-content-path="conversation-2.nextSteps.items[3]">
+          <div class="check"></div>
+          <span>TJ researches Figma MCP for brand asset generation</span>
+        </div>
+        
+        <div class="next-step" data-content-path="conversation-2.nextSteps.items[4]">
+          <div class="check"></div>
+          <span>TJ builds a designer onboarding starter kit</span>
+        </div>
+        
+        <div class="next-step" data-content-path="conversation-2.nextSteps.items[5]">
+          <div class="check"></div>
+          <span>TJ publishes the process as potential inbound marketing content</span>
+        </div>
+        
+        <div class="next-step" data-content-path="conversation-2.nextSteps.items[6]">
+          <div class="check"></div>
+          <span>Continue iterating on the click-to-edit admin panel</span>
+        </div>
+        
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <p>Workhorse &times; GoDoGood &mdash; <a href="/index.html">Conversation 1</a> &middot; <a href="/conversation-3.html">Conversation 3</a> &middot; <a href="/process.html">Full System</a></p>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">&uarr;</button>
+
+  <script>
+    // Scroll effects
+    const nav = document.querySelector('nav');
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+      backToTop.classList.toggle('visible', window.scrollY > 400);
+    });
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "agentic-web-design",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "@anthropic-ai/sdk": "^0.39.0",
+    "jsonwebtoken": "^9.0.2"
+  }
+}

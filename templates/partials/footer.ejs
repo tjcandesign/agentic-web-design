@@ -1,0 +1,8 @@
+<footer>
+  <div><%- site.footer.left %></div>
+<% if (page === 'index') { %>
+  <div><%- site.footer.right %></div>
+<% } else { %>
+  <div><a href="<%- content.footerLink.href %>"><%- content.footerLink.text %></a></div>
+<% } %>
+</footer>

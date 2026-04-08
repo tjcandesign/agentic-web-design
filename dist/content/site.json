@@ -1,0 +1,13 @@
+{
+  "nav": {
+    "logo": "Workhorse",
+    "logoSuffix": "GoDoGood",
+    "links": [
+      { "text": "Full System", "href": "process.html" }
+    ]
+  },
+  "footer": {
+    "left": "Workhorse &times; GoDoGood &mdash; March 2026",
+    "right": "Conversation documented and site generated with AI assistance"
+  }
+}

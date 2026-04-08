@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The AI Innovation Lab &mdash; Agentic Web Design</title>
+  <meta name="description" content="Two weeks in. The partnership evolves from building websites to building a brand — an AI Innovation Lab in DC that bridges design strategy and enterprise consulting for nonprofits and EdTech.">
+  <meta property="og:title" content="The AI Innovation Lab">
+  <meta property="og:description" content="Two weeks in. The GoDoGood AI Innovation Lab concept takes shape.">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◆</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FAFAF8;
+      --text: #1A1A1A;
+      --text-muted: #6B6B6B;
+      --accent: #2C2C2C;
+      --accent-light: #F0EFED;
+      --border: #E5E4E1;
+      --highlight: #E8E6E1;
+      --quote-bg: #F5F4F1;
+      --nav-height: 56px;
+      --green: #22c55e;
+      --green-light: #f0fdf4;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: var(--nav-height); }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* --- Nav --- */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(250, 250, 248, 0.85);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      height: var(--nav-height);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    nav.scrolled { border-bottom-color: var(--border); box-shadow: 0 1px 8px rgba(0,0,0,0.04); }
+    .nav-inner {
+      max-width: 900px; margin: 0 auto; padding: 0 40px;
+      height: 100%; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-weight: 700; font-size: 14px; letter-spacing: -0.01em; color: var(--text); text-decoration: none; }
+    .nav-logo span { color: var(--text-muted); font-weight: 400; }
+    .nav-links { display: flex; align-items: center; gap: 24px; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--text); font-weight: 600; }
+
+    /* --- Header --- */
+    header {
+      max-width: 900px; margin: 0 auto; padding: 120px 40px 60px;
+    }
+    .meta { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 20px; }
+    header h1 {
+      font-family: 'Fraunces', serif; font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 600; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 20px;
+    }
+    header .subtitle { font-size: 1.1rem; color: var(--text-muted); line-height: 1.6; max-width: 640px; margin-bottom: 20px; }
+    header .back-link { font-size: 14px; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    header .back-link:hover { color: var(--text); }
+
+    /* --- Sections --- */
+    .content { max-width: 900px; margin: 0 auto; padding: 0 40px; }
+    section { padding: 60px 0; border-top: 1px solid var(--border); }
+    .section-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+      color: var(--text-muted); text-transform: uppercase; margin-bottom: 12px;
+    }
+    .section-heading {
+      font-family: 'Fraunces', serif; font-size: clamp(1.6rem, 3vw, 2rem);
+      font-weight: 600; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 32px;
+    }
+
+    /* --- Recap Stats --- */
+    .recap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .recap-card {
+      background: var(--green-light); border: 1px solid #bbf7d0;
+      border-radius: 12px; padding: 24px;
+    }
+    .recap-card .stat { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 700; color: #16a34a; margin-bottom: 4px; }
+    .recap-card .stat-text { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
+
+    /* --- Theme Cards --- */
+    .theme-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .theme-card {
+      background: white; border: 1px solid var(--border); border-radius: 12px;
+      padding: 28px; transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .theme-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+    .theme-card .num { font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; }
+    .theme-card h3 { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 600; margin-bottom: 10px; line-height: 1.3; }
+    .theme-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+    /* --- Quotes --- */
+    .quote-block {
+      background: var(--quote-bg); border-left: 3px solid var(--accent);
+      padding: 28px 32px; border-radius: 0 12px 12px 0; margin: 40px 0;
+    }
+    .quote-block blockquote {
+      font-family: 'Fraunces', serif; font-size: 1.15rem;
+      font-weight: 400; line-height: 1.6; font-style: italic; margin-bottom: 12px;
+    }
+    .quote-block .attribution { font-size: 13px; color: var(--text-muted); }
+    .quote-block .attribution strong { font-weight: 600; color: var(--text); }
+    .quote-block .context { font-size: 12px; color: var(--text-muted); margin-top: 4px; font-style: italic; }
+
+    /* --- Feature Cards --- */
+    .feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .feature-card {
+      background: #1a1a1a; color: white; border-radius: 12px; padding: 28px;
+    }
+    .feature-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+    .feature-card p { font-size: 14px; color: #aaa; line-height: 1.6; }
+
+    /* --- Pipeline Steps --- */
+    .pipeline-list { display: flex; flex-direction: column; gap: 0; }
+    .pipeline-step {
+      display: grid; grid-template-columns: 60px 1fr; gap: 20px;
+      padding: 28px 0; border-bottom: 1px solid var(--border);
+    }
+    .pipeline-step:last-child { border-bottom: none; }
+    .pipeline-step .step-num {
+      font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 700;
+      color: var(--text-muted); padding-top: 2px;
+    }
+    .pipeline-step h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
+    .pipeline-step p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+    /* --- Market Stats --- */
+    .market-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 28px; }
+    .market-stat {
+      text-align: center; padding: 24px 16px;
+      background: white; border: 1px solid var(--border); border-radius: 12px;
+    }
+    .market-stat .val { font-family: 'Fraunces', serif; font-size: 1.8rem; font-weight: 700; margin-bottom: 4px; }
+    .market-stat .lbl { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+
+    /* --- WordPress Points --- */
+    .wp-points { display: flex; flex-direction: column; gap: 20px; }
+    .wp-point { padding: 24px; background: white; border: 1px solid var(--border); border-radius: 12px; }
+    .wp-point h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
+    .wp-point p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+    /* --- Phase Cards --- */
+    .phase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .phase-card {
+      background: white; border: 1px solid var(--border); border-radius: 12px;
+      padding: 28px; display: flex; flex-direction: column;
+    }
+    .phase-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+      color: var(--green); text-transform: uppercase; margin-bottom: 6px;
+    }
+    .phase-card h3 { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 600; margin-bottom: 14px; }
+    .phase-card ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .phase-card li { font-size: 13px; color: var(--text-muted); line-height: 1.5; padding-left: 16px; position: relative; }
+    .phase-card li::before { content: ''; position: absolute; left: 0; top: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--border); }
+
+    /* --- Ideas --- */
+    .ideas-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .idea-card {
+      background: white; border: 1px solid var(--border); border-radius: 12px;
+      padding: 24px; transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .idea-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+    .idea-tag {
+      display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 3px 8px; border-radius: 4px;
+      background: var(--accent-light); color: var(--text-muted); margin-bottom: 10px;
+    }
+    .idea-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+    .idea-card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+    /* --- Next Steps --- */
+    .next-steps-list { display: flex; flex-direction: column; gap: 12px; }
+    .next-step {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 14px 18px; background: white; border: 1px solid var(--border); border-radius: 10px;
+    }
+    .next-step .check { flex-shrink: 0; width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 50%; margin-top: 1px; }
+    .next-step span { font-size: 14px; color: var(--text); line-height: 1.5; }
+
+    /* --- Footer --- */
+    footer {
+      max-width: 900px; margin: 0 auto; padding: 60px 40px;
+      border-top: 1px solid var(--border); text-align: center;
+    }
+    footer p { font-size: 13px; color: var(--text-muted); }
+    footer a { color: var(--text); text-decoration: none; font-weight: 500; }
+    footer a:hover { text-decoration: underline; }
+
+    /* --- Reveal Animation --- */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* --- Back to Top --- */
+    .back-to-top {
+      position: fixed; bottom: 32px; right: 32px; width: 40px; height: 40px;
+      border-radius: 50%; background: var(--accent); color: white;
+      border: none; cursor: pointer; font-size: 18px; display: flex;
+      align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    }
+    .back-to-top.visible { opacity: 1; pointer-events: auto; }
+
+    /* --- Responsive --- */
+    @media (max-width: 768px) {
+      header, .content { padding-left: 20px; padding-right: 20px; }
+      footer { padding-left: 20px; padding-right: 20px; }
+      .recap-grid { grid-template-columns: 1fr; }
+      .theme-grid { grid-template-columns: 1fr; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .market-stats { grid-template-columns: repeat(2, 1fr); }
+      .phase-grid { grid-template-columns: 1fr; }
+      .ideas-grid { grid-template-columns: 1fr; }
+      .pipeline-step { grid-template-columns: 40px 1fr; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="/index.html" class="nav-logo">Workhorse <span>&times; GoDoGood</span></a>
+      <div class="nav-links">
+        <a href="/index.html">Conversation 1</a>
+        <a href="/conversation-2.html">Conversation 2</a>
+        <a href="/conversation-3.html" class="active">Conversation 3</a>
+        <a href="/process.html">Full System</a>
+      </div>
+    </div>
+  </nav>
+
+  <header id="top">
+    <div class="meta reveal" data-content-path="conversation-3.header.dateline">WORKHORSE &times; GODOGOOD &mdash; APRIL 8, 2026</div>
+    <h1 class="reveal" data-content-path="conversation-3.header.title">The AI Innovation Lab</h1>
+    <p class="subtitle reveal" data-content-path="conversation-3.header.subtitle">Two weeks in. The partnership evolves from building websites to building a brand — an AI Innovation Lab in DC that bridges design strategy and enterprise consulting for nonprofits and EdTech.</p>
+    <a href="/conversation-2.html" class="back-link reveal" data-content-path="conversation-3.header.linkText">Read Conversation 2 &rarr;</a>
+  </header>
+
+  <div class="content">
+
+    <!-- Since Last Time -->
+    <section class="reveal">
+      <div class="section-label" data-content-path="conversation-3.recap.label">SINCE LAST TIME</div>
+      <h2 class="section-heading" data-content-path="conversation-3.recap.heading">Two weeks of momentum</h2>
+      <div class="recap-grid">
+
+        <div class="recap-card" data-content-path="conversation-3.recap.items[0]">
+          <div class="stat">2 weeks</div>
+          <div class="stat-text">Time since the initial conversation — from concept to emerging business model</div>
+        </div>
+
+        <div class="recap-card" data-content-path="conversation-3.recap.items[1]">
+          <div class="stat">tjcichecki.com</div>
+          <div class="stat-text">TJ launched a personal brand site with articles on AI-assisted design</div>
+        </div>
+
+        <div class="recap-card" data-content-path="conversation-3.recap.items[2]">
+          <div class="stat">2 verticals</div>
+          <div class="stat-text">Partnership expanded from nonprofits only to include EdTech as a second market</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Key Themes -->
+    <section class="reveal">
+      <div class="section-label" data-content-path="conversation-3.themes.label">KEY THEMES</div>
+      <h2 class="section-heading" data-content-path="conversation-3.themes.heading">What's shaping the Innovation Lab</h2>
+      <div class="theme-grid">
+
+        <div class="theme-card" data-content-path="conversation-3.themes.cards[0]">
+          <div class="num">01</div>
+          <h3>The Innovation Lab Concept</h3>
+          <p>Rob proposes launching a "GoDoGood AI Innovation Lab in DC" in partnership with TJ/Workhorse. Not a new venture — a collaboration. Weekly calls, AI efficiency updates, implementation into agency processes. A public-facing hub for AI + design thinking.</p>
+        </div>
+
+        <div class="theme-card" data-content-path="conversation-3.themes.cards[1]">
+          <div class="num">02</div>
+          <h3>Personal Brand as Anchor</h3>
+          <p>Better to position the lab around TJ's personal brand (tjcichecki.com) than Workhorse initially. Articles already live, credibility established. Rob's clients can point to TJ as the Lab lead. The studio aesthetic — analog workshop producing cutting-edge tech — is the selling point.</p>
+        </div>
+
+        <div class="theme-card" data-content-path="conversation-3.themes.cards[2]">
+          <div class="num">03</div>
+          <h3>Two Target Verticals</h3>
+          <p>Nonprofits: purpose-driven orgs needing $10–20K brand + website packages. Fast start, simpler needs, huge volume. EdTech: 30–40% of GoDoGood's work. VC/PE-backed platforms with product teams, AI-obsessed, $100K+ budgets for retainers and rebrands.</p>
+        </div>
+
+        <div class="theme-card" data-content-path="conversation-3.themes.cards[3]">
+          <div class="num">04</div>
+          <h3>Productized Packages</h3>
+          <p>Nonprofit Starter: brand + site + docs for $10–20K. WordPress-based (new Claude Code integration). Two conversations (sales + kickoff brain dump), then largely automated. AI Consulting Audit: $10K engagement to assess marketing ops and deliver board-ready recommendations.</p>
+        </div>
+
+        <div class="theme-card" data-content-path="conversation-3.themes.cards[4]">
+          <div class="num">05</div>
+          <h3>The Monetization Question</h3>
+          <p>Key open question: how does TJ get compensated beyond project fees? If Rob sells a $10K package, what's the split? Pricing strategy and go-to-market model still being worked out between the partners.</p>
+        </div>
+
+        <div class="theme-card" data-content-path="conversation-3.themes.cards[5]">
+          <div class="num">06</div>
+          <h3>The Site-Copying Skill</h3>
+          <p>TJ built a Claude Code skill that fully replicates a website — pulled GoDoGood's site, rebuilt it locally, applied recommended design changes. Potential to streamline the productized workflow: less boilerplate, faster iteration on existing sites.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Quotes -->
+
+    <div class="quote-block reveal" data-content-path="conversation-3.quotes[0]">
+      <blockquote>&ldquo;We partnered with TJ and his team at Workhorse, and we're coming together to build the GoDoGood AI Innovation Lab.&rdquo;</blockquote>
+      <div class="attribution">&mdash; <strong>Rob Sulzer</strong></div>
+      <div class="context">On the pitch to clients and team</div>
+    </div>
+
+    <div class="quote-block reveal" data-content-path="conversation-3.quotes[1]">
+      <blockquote>&ldquo;Just turn off all the screens, grab a pool stick, and let's just talk it. It's the opposite of AI, and it's so ironic. But yet the latest technologies coming out of it.&rdquo;</blockquote>
+      <div class="attribution">&mdash; <strong>Rob Sulzer</strong></div>
+      <div class="context">On the Workhorse studio</div>
+    </div>
+
+    <div class="quote-block reveal" data-content-path="conversation-3.quotes[2]">
+      <blockquote>&ldquo;I took a copy of your website, rebuilt it locally, and then applied all my recommended changes. It pulled in all the images and everything.&rdquo;</blockquote>
+      <div class="attribution">&mdash; <strong>TJ Cichecki</strong></div>
+      <div class="context">On the site-copying skill</div>
+    </div>
+
+
+    <!-- Emerging Opportunities -->
+    <section class="reveal">
+      <div class="section-label" data-content-path="conversation-3.opportunities.label">EMERGING OPPORTUNITIES</div>
+      <h2 class="section-heading" data-content-path="conversation-3.opportunities.heading">Four doors that just opened</h2>
+      <div class="feature-grid">
+
+        <div class="feature-card" data-content-path="conversation-3.opportunities.items[0]">
+          <h3>Shriners Children's Hospital</h3>
+          <p>Current GoDoGood client, ~$1B annual revenue. Team fascinated by AI workflows. Rob's pitch: "Worth a trip up to DC to see what TJ's building."</p>
+        </div>
+
+        <div class="feature-card" data-content-path="conversation-3.opportunities.items[1]">
+          <h3>EdTech Pipeline</h3>
+          <p>GoDoGood's existing EdTech clients on retainer, always looking for efficiencies. Marketing leadership moves between companies and brings the agency along. VC/PE-backed, willing to invest in new initiatives.</p>
+        </div>
+
+        <div class="feature-card" data-content-path="conversation-3.opportunities.items[2]">
+          <h3>Shields & Orca Concrete</h3>
+          <p>Rob's family business. Orca does $5M/year in concrete subcontracting, expanding nationally with franchise model. Parent company Shields at ~$90M/year. Brand and web presence needed for franchise rollout.</p>
+        </div>
+
+        <div class="feature-card" data-content-path="conversation-3.opportunities.items[3]">
+          <h3>Enterprise AI Consulting</h3>
+          <p>Organizations willing to pay $10K+ for a structured assessment of their marketing AI readiness. Board-ready deliverables. Currently only offered by Accenture and McKinsey at much higher price points.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Go-to-Market Pipeline -->
+    <section class="reveal">
+      <div class="section-label" data-content-path="conversation-3.gtm.label">GO-TO-MARKET POSITIONING</div>
+      <h2 class="section-heading" data-content-path="conversation-3.gtm.heading">Six-step launch strategy</h2>
+      <div class="pipeline-list">
+
+        <div class="pipeline-step" data-content-path="conversation-3.gtm.steps[0]">
+          <div class="step-num">01</div>
+          <div>
+            <h3>Announce the Partnership</h3>
+            <p>GoDoGood + TJ Cichecki launch the AI Innovation Lab in DC. Press release, case studies, internal team briefing. Not "we're pivoting" — "we're partnering with someone who's already deep in this."</p>
+          </div>
+        </div>
+
+        <div class="pipeline-step" data-content-path="conversation-3.gtm.steps[1]">
+          <div class="step-num">02</div>
+          <div>
+            <h3>Internal Rollout</h3>
+            <p>Weekly AI updates within GoDoGood. Share wins, new workflows, efficiency gains. Build buy-in with existing team before external push.</p>
+          </div>
+        </div>
+
+        <div class="pipeline-step" data-content-path="conversation-3.gtm.steps[2]">
+          <div class="step-num">03</div>
+          <div>
+            <h3>Client Introductions</h3>
+            <p>Identify existing clients who've asked about AI (like Shriners). Position TJ as the Lab lead. "It's worth a call — or a trip up to DC."</p>
+          </div>
+        </div>
+
+        <div class="pipeline-step" data-content-path="conversation-3.gtm.steps[3]">
+          <div class="step-num">04</div>
+          <div>
+            <h3>Nonprofit Package Launch</h3>
+            <p>Productized $10–20K offering: brand + WordPress site + documentation. Target smaller nonprofits that currently go to the back of the line.</p>
+          </div>
+        </div>
+
+        <div class="pipeline-step" data-content-path="conversation-3.gtm.steps[4]">
+          <div class="step-num">05</div>
+          <div>
+            <h3>EdTech Outreach</h3>
+            <p>Leverage existing retainer relationships. Propose AI efficiency audits and innovation workshops for product and marketing teams.</p>
+          </div>
+        </div>
+
+        <div class="pipeline-step" data-content-path="conversation-3.gtm.steps[5]">
+          <div class="step-num">06</div>
+          <div>
+            <h3>Consulting Engagements</h3>
+            <p>Structured $10K assessments for organizations wanting to implement AI in marketing workflows. Deliver board-ready recommendations they can use to get internal buy-in.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- WordPress Play -->
+    <section class="reveal">
+      <div class="section-label" data-content-path="conversation-3.wordpress.label">THE WORDPRESS PLAY</div>
+      <h2 class="section-heading" data-content-path="conversation-3.wordpress.heading">Why WordPress now</h2>
+      <div class="wp-points">
+
+        <div class="wp-point" data-content-path="conversation-3.wordpress.points[0]">
+          <h3>WordPress + Claude Code Integration</h3>
+          <p>New WordPress Studio allows local development with Claude Code, then deployment to WordPress hosting. Same sales points GoDoGood has been using for years — no need to pitch a new tech stack.</p>
+        </div>
+
+        <div class="wp-point" data-content-path="conversation-3.wordpress.points[1]">
+          <h3>Brand Built Into the Backend</h3>
+          <p>Brand guidelines, style documentation, and content strategy live on the site itself. Clients get their own brand reference without a separate PDF or Figma file.</p>
+        </div>
+
+        <div class="wp-point" data-content-path="conversation-3.wordpress.points[2]">
+          <h3>Two Conversations, Then Automation</h3>
+          <p>The human work is the sales call and the kickoff brain dump. Everything after that — site build, content population, brand documentation — can be largely automated from that captured context.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- What's Different -->
+    <section class="reveal">
+      <div class="section-label" data-content-path="conversation-3.differentiation.label">WHAT'S DIFFERENT</div>
+      <h2 class="section-heading" data-content-path="conversation-3.differentiation.heading">Versus Accenture & McKinsey</h2>
+      <div class="ideas-grid">
+
+        <div class="idea-card" data-content-path="conversation-3.differentiation.items[0]">
+          <div class="idea-tag">Market</div>
+          <h3>Nonprofit-Specific Positioning</h3>
+          <p>Accenture and McKinsey serve Fortune 500. This targets the 20,000 nonprofits and purpose-driven orgs that can't afford a $1M consulting engagement but desperately need AI guidance.</p>
+        </div>
+
+        <div class="idea-card" data-content-path="conversation-3.differentiation.items[1]">
+          <div class="idea-tag">Approach</div>
+          <h3>Design-Led, Not Systems-Led</h3>
+          <p>Big consultancies focus on enterprise systems integration. This starts with brand, design, and marketing workflows — the creative side that nonprofits and EdTech companies actually care about.</p>
+        </div>
+
+        <div class="idea-card" data-content-path="conversation-3.differentiation.items[2]">
+          <div class="idea-tag">Price</div>
+          <h3>Accessible Price Points</h3>
+          <p>$10K for a structured AI audit. $10–20K for a brand + website package. Not $500K annual retainers. Sized for the organizations that need it most.</p>
+        </div>
+
+        <div class="idea-card" data-content-path="conversation-3.differentiation.items[3]">
+          <div class="idea-tag">Proof</div>
+          <h3>Built, Not Theorized</h3>
+          <p>Everything being sold has already been built and tested. The process documentation site, the click-to-edit admin, the site-copying skill — these aren't proposals, they're working tools.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Closing Quote -->
+    <div class="quote-block reveal" data-content-path="conversation-3.closingQuote">
+      <blockquote>&ldquo;Design is a decision, not a decoration. Strategy before pixels.&rdquo;</blockquote>
+      <div class="attribution">&mdash; <strong>TJ Cichecki</strong></div>
+    </div>
+
+    <!-- Next Steps -->
+    <section class="reveal">
+      <div class="section-label" data-content-path="conversation-3.nextSteps.label">NEXT STEPS</div>
+      <h2 class="section-heading" data-content-path="conversation-3.nextSteps.heading">What we agreed to do</h2>
+      <div class="next-steps-list">
+
+        <div class="next-step" data-content-path="conversation-3.nextSteps.items[0]">
+          <div class="check"></div>
+          <span>Rob presents the Innovation Lab concept to the GoDoGood team internally</span>
+        </div>
+
+        <div class="next-step" data-content-path="conversation-3.nextSteps.items[1]">
+          <div class="check"></div>
+          <span>Define revenue share and compensation model between TJ and GoDoGood</span>
+        </div>
+
+        <div class="next-step" data-content-path="conversation-3.nextSteps.items[2]">
+          <div class="check"></div>
+          <span>Reconvene early next week to lock in go-to-market strategy</span>
+        </div>
+
+        <div class="next-step" data-content-path="conversation-3.nextSteps.items[3]">
+          <div class="check"></div>
+          <span>Design the public-facing brand for the AI Innovation Lab</span>
+        </div>
+
+        <div class="next-step" data-content-path="conversation-3.nextSteps.items[4]">
+          <div class="check"></div>
+          <span>Identify pilot prospects: one nonprofit, one EdTech</span>
+        </div>
+
+        <div class="next-step" data-content-path="conversation-3.nextSteps.items[5]">
+          <div class="check"></div>
+          <span>Build out the productized nonprofit starter package with pricing</span>
+        </div>
+
+        <div class="next-step" data-content-path="conversation-3.nextSteps.items[6]">
+          <div class="check"></div>
+          <span>TJ adds Innovation Lab section to tjcichecki.com with studio photos</span>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <p>Workhorse &times; GoDoGood &mdash; <a href="/index.html">Conversation 1</a> &middot; <a href="/conversation-2.html">Conversation 2</a> &middot; <a href="/process.html">Full System</a></p>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">&uarr;</button>
+
+  <script>
+    // Scroll effects
+    const nav = document.querySelector('nav');
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+      backToTop.classList.toggle('visible', window.scrollY > 400);
+    });
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>

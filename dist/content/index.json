@@ -1,0 +1,183 @@
+{
+  "meta": {
+    "title": "The Future of Agentic Web Design — Workhorse × GoDoGood",
+    "description": "A conversation between TJ Cichecki (Workhorse) and Rob Sulzer (GoDoGood) on how AI agents are reshaping how we build, maintain, and sell websites.",
+    "ogTitle": "The Future of Web Design Is Agentic",
+    "ogDescription": "How AI agents are reshaping how we build, maintain, and sell websites — and what it means for the design industry.",
+    "twitterDescription": "How AI agents are reshaping how we build, maintain, and sell websites."
+  },
+  "header": {
+    "dateline": "Workhorse &times; GoDoGood &mdash; March 23, 2026",
+    "title": "The Future of Web Design Is Agentic",
+    "subtitle": "A conversation between TJ Cichecki (Workhorse) and Rob Sulzer (GoDoGood) on how AI agents are reshaping how we build, maintain, and sell websites &mdash; and what it means for the design industry.",
+    "ctaText": "View the Full System",
+    "ctaHref": "process.html"
+  },
+  "premise": {
+    "label": "The Premise",
+    "heading": "The website industry is at an inflection point",
+    "paragraphs": [
+      "For two decades, the cycle has been the same: a client needs a website, a team spends months designing and developing it in WordPress, and three years later everyone does it again. The tools have gotten better, but the fundamental model &mdash; designers hand off to developers, developers grind through code, clients wait &mdash; hasn't changed.",
+      "Until now. The emergence of AI coding agents (like Claude Code) combined with headless CMS platforms (like Sanity) is collapsing the timeline from months to days, while actually improving the quality of the output. This isn't a theoretical future. It's happening right now."
+    ],
+    "quote": {
+      "text": "We're not waiting on people coding. We're not. That's the elephant in the room.",
+      "attribution": "Rob Sulzer, GoDoGood"
+    }
+  },
+  "themes": {
+    "label": "Key Themes",
+    "heading": "What emerged from the conversation",
+    "cards": [
+      {
+        "number": "01",
+        "title": "Speed, Not Price",
+        "description": "Clients aren't asking for cheaper websites. They're asking for faster ones. The bottleneck has always been development &mdash; waiting on code, waiting on revisions, waiting on QA. AI agents eliminate that bottleneck entirely."
+      },
+      {
+        "number": "02",
+        "title": "Open Source Ownership",
+        "description": "Clients &mdash; especially nonprofits &mdash; want to own their digital assets. Not rent them on Webflow. Not be locked into a proprietary platform. The new stack (Next.js + headless CMS) gives them a real, portable asset on their balance sheet."
+      },
+      {
+        "number": "03",
+        "title": "Design Is the Differentiator",
+        "description": "When anyone can generate code, the thing that separates great from generic is the design eye, the strategy, and the brand thinking. The purple-gradient AI aesthetic is already exhausting people. Taste wins."
+      },
+      {
+        "number": "04",
+        "title": "The Designer Becomes the Operator",
+        "description": "Instead of directing interns or managing developer handoffs, the designer orchestrates AI agents &mdash; assigning tasks, reviewing output, refining direction. Same creative leadership, radically different execution."
+      },
+      {
+        "number": "05",
+        "title": "Authenticity Is Coming Back",
+        "description": "Clients can already spot AI-generated content. The brands that win will be the ones that feel human, intentional, and authentic &mdash; which requires real strategic thinking, not just prompting."
+      },
+      {
+        "number": "06",
+        "title": "The Market Is Massive",
+        "description": "There are roughly 100,000+ qualifying nonprofits in the US alone, and at any given time 20% are actively looking to redo their website. That's 20,000 potential clients &mdash; many of whom are underserved by the current agency model."
+      }
+    ]
+  },
+  "quotes": {
+    "label": "In Their Words",
+    "heading": "Key moments from the conversation",
+    "items": [
+      {
+        "text": "Not even cheaper. They just want it done quicker. And I need it to look gorgeous. I need the strategy.",
+        "attribution": "Rob Sulzer"
+      },
+      {
+        "text": "The most qualified to make a website for a company is probably the company themselves. They know the subject matter. They're the better experts in their own work. They just don't know the technology.",
+        "attribution": "TJ Cichecki"
+      },
+      {
+        "text": "You're going to coordinate agents that are going to do this for you. That's going to save your career as a creative director, as a strategist. Instead of directing interns, you're directing agents within these platforms.",
+        "attribution": "Rob Sulzer"
+      },
+      {
+        "text": "This took me like a day and a half to build. Total hours combined, probably like 10 hours. And most of it wasn't actually working Claude Code &mdash; it was the conversations, the strategy.",
+        "attribution": "TJ Cichecki, on building a complete portfolio site with CMS"
+      },
+      {
+        "text": "Whoever has the brand is going to win. Authenticity, the experience with your product or service, the look, the feel &mdash; that's what's going to survive.",
+        "attribution": "Rob Sulzer"
+      }
+    ]
+  },
+  "process": {
+    "label": "The Process",
+    "heading": "How agentic web design works",
+    "intro": "This is the emerging workflow &mdash; a designer-led, AI-powered process that collapses the traditional agency timeline while keeping strategy and brand at the center.",
+    "steps": [
+      {
+        "title": "Discovery &amp; Kickoff",
+        "description": "One 45-minute meeting with the client. Gather the brand story, goals, audience, tone, and visual direction. This is where the human insight happens &mdash; understanding what the client actually needs versus what they think they need."
+      },
+      {
+        "title": "AI-Assisted Research &amp; Direction",
+        "description": "Use AI tools (ChatGPT for planning, Claude for execution) to research visual direction, generate mood concepts, and draft content from the conversation. Feed style references and brand guidelines as prompts. This replaces weeks of mood boarding with hours of iteration."
+      },
+      {
+        "title": "Design Concept &amp; Client Review",
+        "description": "Present a design direction based on the research. This can be a single well-designed page &mdash; the AI agents will extrapolate the system from there. One more 45-minute meeting to align on the look and feel."
+      },
+      {
+        "title": "Agentic Development",
+        "description": "Deploy Claude Code to build the full site &mdash; front-end pages, responsive design, animations, and a complete headless CMS backend (Sanity). The AI builds the content management system alongside the site, so the client gets both the storefront and the keys."
+      },
+      {
+        "title": "QA, Security &amp; Handoff",
+        "description": "Run automated security checks, test the CMS interface, verify responsive behavior. The client gets a web-based editor (similar to WordPress) where they can log in, edit content, and manage their site &mdash; no code required. Everything is open source and fully owned."
+      }
+    ]
+  },
+  "comparison": {
+    "label": "Old vs. New",
+    "heading": "What changes &mdash; and what doesn't",
+    "columns": ["", "Traditional Agency Model", "Agentic Web Design"],
+    "rows": [
+      ["Timeline", "8&ndash;16 weeks", "1&ndash;3 weeks"],
+      ["Dev Bottleneck", "Waiting on developers for every change", "AI agents build in real-time"],
+      ["Platform", "WordPress (legacy plugins, bloat)", "Next.js + Headless CMS (lean, modern)"],
+      ["Ownership", "Open source (WordPress) or rented (Webflow)", "Fully open source, client-owned asset"],
+      ["Client CMS", "WordPress admin (complex)", "Sanity Studio (clean, purpose-built)"],
+      ["Design Quality", "Limited by dev time and budget", "Design-led &mdash; build what you envision"],
+      ["Strategy", "Same as always", "Same as always &mdash; this doesn't change"],
+      ["Brand Thinking", "Same as always", "Same as always &mdash; this doesn't change"]
+    ]
+  },
+  "numbers": {
+    "label": "By the Numbers",
+    "heading": "The case in context",
+    "stats": [
+      { "value": "10 hrs", "label": "To build a complete portfolio site with CMS, from two meetings" },
+      { "value": "20K", "label": "US nonprofits actively looking to redo their website at any given time" },
+      { "value": "10x", "label": "Output increase reported by dev teams using AI agents vs. traditional coding" }
+    ]
+  },
+  "opportunity": {
+    "label": "The Opportunity",
+    "heading": "Where Workhorse + GoDoGood fit",
+    "paragraphs": [
+      "GoDoGood has the client relationships, the brand strategy expertise, and the nonprofit market knowledge. Workhorse has the design eye and the agentic development capability. Together, the model looks like this:",
+      "<strong>GoDoGood</strong> handles brand strategy, client relationships, and ongoing retainer work (campaigns, social, email, impact reports). <strong>Workhorse</strong> handles UI/UX design and agentic development &mdash; turning brand direction into a live, open-source website in days instead of months.",
+      "The entry point is the $7,500&ndash;$15,000 website + brand refresh &mdash; the sweet spot where traditional agencies either turn clients away or stick them in a WordPress queue. With agentic development, this becomes a fast, high-quality, profitable engagement that opens the door to ongoing work."
+    ],
+    "nextSteps": {
+      "title": "Immediate Next Steps",
+      "items": [
+        "TJ to document the agentic web design process and create sales-ready materials",
+        "Build a landing page on the Workhorse site showcasing this offering",
+        "Rob to identify 2&ndash;3 smaller clients as pilot projects",
+        "Schedule an intro call with the GoDoGood team once materials are ready",
+        "Rob and Michelle to visit the Workhorse office in DC in the coming weeks"
+      ]
+    }
+  },
+  "stack": {
+    "label": "Under the Hood",
+    "heading": "The technology stack",
+    "intro": "For the technically curious &mdash; this is what's powering agentic web design today.",
+    "cards": [
+      {
+        "title": "Claude Code",
+        "description": "Anthropic's AI coding agent. Writes production-quality front-end and back-end code from natural language prompts. Spawns multiple agents for parallel development."
+      },
+      {
+        "title": "Sanity (Headless CMS)",
+        "description": "A modern, structured content management system. Provides a clean editor interface for clients &mdash; similar to WordPress admin, but built specifically for the content on their site."
+      },
+      {
+        "title": "Next.js / React",
+        "description": "The front-end framework. Industry standard, open source, used by the biggest companies in the world. Fast, accessible, and fully owned by the client."
+      },
+      {
+        "title": "GitHub + Standard Hosting",
+        "description": "Code lives in a repository the client owns. Hosted on the same infrastructure as any WordPress site &mdash; Vercel, Netlify, or a traditional server. Nothing exotic."
+      }
+    ]
+  }
+}

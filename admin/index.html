@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site Editor — Agentic Web Design</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◆</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: #1a1a1a; color: #e5e5e5; height: 100vh; overflow: hidden; }
+
+    /* Login */
+    .login-screen { position: fixed; inset: 0; background: #1a1a1a; display: flex; align-items: center; justify-content: center; z-index: 1000; }
+    .login-screen.hidden { display: none; }
+    .login-box { background: #222; border: 1px solid #333; border-radius: 14px; padding: 2.5rem 2rem; max-width: 360px; width: 90%; text-align: center; }
+    .login-box h2 { font-family: 'Fraunces', serif; font-size: 1.4rem; margin-bottom: 0.3rem; color: white; }
+    .login-box p { color: #888; font-size: 0.84rem; margin-bottom: 1.4rem; }
+    .login-input { width: 100%; padding: 0.7rem 1rem; font-size: 0.95rem; font-family: inherit; border: 1px solid #444; border-radius: 8px; background: #1a1a1a; color: white; outline: none; text-align: center; margin-bottom: 0.75rem; }
+    .login-input:focus { border-color: #4ade80; }
+    .login-btn { width: 100%; padding: 0.65rem; font-size: 0.9rem; font-weight: 600; font-family: inherit; background: white; color: #1a1a1a; border: none; border-radius: 8px; cursor: pointer; }
+    .login-btn:hover { background: #e5e5e5; }
+    .login-error { color: #f87171; font-size: 0.78rem; margin-top: 0.5rem; min-height: 1.2em; }
+
+    /* Layout */
+    .app { display: none; height: 100vh; }
+    .app.visible { display: flex; }
+    .chat-panel { width: 420px; min-width: 360px; display: flex; flex-direction: column; border-right: 1px solid #333; background: #1a1a1a; }
+    .preview-panel { flex: 1; display: flex; flex-direction: column; background: #111; }
+
+    /* Chat header */
+    .chat-header { padding: 16px 20px; border-bottom: 1px solid #333; display: flex; align-items: center; justify-content: space-between; }
+    .chat-header h1 { font-size: 14px; font-weight: 600; color: white; }
+    .chat-header .publish-btn { padding: 6px 16px; font-size: 12px; font-weight: 600; font-family: inherit; background: #22c55e; color: white; border: none; border-radius: 6px; cursor: pointer; transition: background 0.15s; }
+    .chat-header .publish-btn:hover { background: #16a34a; }
+    .chat-header .publish-btn:disabled { background: #333; color: #666; cursor: not-allowed; }
+    .chat-header .publish-btn.publishing { background: #f59e0b; }
+
+    /* Messages */
+    .messages { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+    .message { max-width: 95%; }
+    .message.user { align-self: flex-end; }
+    .message.assistant { align-self: flex-start; }
+    .message-bubble { padding: 10px 14px; border-radius: 12px; font-size: 14px; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word; }
+    .message.user .message-bubble { background: #2563eb; color: white; border-bottom-right-radius: 4px; }
+    .message.assistant .message-bubble { background: #2a2a2a; color: #e5e5e5; border-bottom-left-radius: 4px; border: 1px solid #333; }
+    .message-bubble strong { font-weight: 600; }
+    .message-bubble code { background: rgba(255,255,255,0.1); padding: 1px 5px; border-radius: 3px; font-size: 13px; }
+
+    /* Change indicator */
+    .change-badge { display: inline-block; background: #22c55e; color: white; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; margin-top: 8px; }
+
+    /* Starters */
+    .starters { padding: 20px; display: flex; flex-direction: column; gap: 8px; }
+    .starters-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #666; margin-bottom: 4px; }
+    .starter-btn { background: #2a2a2a; border: 1px solid #333; color: #aaa; padding: 8px 14px; border-radius: 8px; font-size: 13px; font-family: inherit; cursor: pointer; text-align: left; transition: all 0.15s; }
+    .starter-btn:hover { background: #333; color: white; border-color: #444; }
+
+    /* Input */
+    .chat-input-area { padding: 16px 20px; border-top: 1px solid #333; display: flex; gap: 8px; }
+    .chat-input { flex: 1; padding: 10px 14px; font-size: 14px; font-family: inherit; background: #2a2a2a; color: white; border: 1px solid #333; border-radius: 8px; outline: none; resize: none; min-height: 40px; max-height: 120px; }
+    .chat-input:focus { border-color: #4ade80; }
+    .chat-input::placeholder { color: #555; }
+    .send-btn { padding: 10px 16px; font-size: 13px; font-weight: 600; font-family: inherit; background: white; color: #1a1a1a; border: none; border-radius: 8px; cursor: pointer; align-self: flex-end; }
+    .send-btn:hover { background: #e5e5e5; }
+    .send-btn:disabled { background: #333; color: #666; cursor: not-allowed; }
+
+    /* Preview header */
+    .preview-header { padding: 10px 16px; border-bottom: 1px solid #333; display: flex; align-items: center; gap: 12px; background: #1a1a1a; }
+    .preview-header select { background: #2a2a2a; color: white; border: 1px solid #333; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-family: inherit; }
+    .preview-header .annotation-toggle { font-size: 12px; color: #888; display: flex; align-items: center; gap: 6px; cursor: pointer; margin-left: auto; }
+    .preview-header .annotation-toggle input { accent-color: #4ade80; }
+    .preview-frame { flex: 1; border: none; background: white; }
+
+    /* Loading */
+    .typing { display: flex; gap: 4px; padding: 4px 0; }
+    .typing span { width: 6px; height: 6px; background: #555; border-radius: 50%; animation: bounce 1.4s infinite; }
+    .typing span:nth-child(2) { animation-delay: 0.2s; }
+    .typing span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes bounce { 0%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-8px); } }
+
+    /* Status bar */
+    .status-bar { padding: 6px 16px; font-size: 11px; color: #555; border-top: 1px solid #222; }
+    .status-bar.success { color: #22c55e; }
+    .status-bar.error { color: #f87171; }
+
+    /* Mobile */
+    @media (max-width: 800px) {
+      .app.visible { flex-direction: column; }
+      .chat-panel { width: 100%; height: 50vh; min-width: unset; border-right: none; border-bottom: 1px solid #333; }
+      .preview-panel { height: 50vh; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login -->
+  <div class="login-screen" id="loginScreen">
+    <div class="login-box">
+      <h2>Site Editor</h2>
+      <p>Enter the admin password to continue</p>
+      <input type="password" class="login-input" id="loginPassword" placeholder="Password" autocomplete="current-password">
+      <button class="login-btn" id="loginBtn">Sign In</button>
+      <div class="login-error" id="loginError"></div>
+    </div>
+  </div>
+
+  <!-- App -->
+  <div class="app" id="app">
+    <div class="chat-panel">
+      <div class="chat-header">
+        <h1>Site Editor</h1>
+        <button class="publish-btn" id="publishBtn" disabled>Publish</button>
+      </div>
+
+      <div class="messages" id="messages">
+        <div class="starters" id="starters">
+          <div class="starters-label">Try saying</div>
+          <button class="starter-btn" data-msg="Change the main headline to something punchier">Change the main headline</button>
+          <button class="starter-btn" data-msg="Update the first stat from 10 hrs to 8 hrs">Update the stats</button>
+          <button class="starter-btn" data-msg="Add a new quote from a team member">Add a new quote</button>
+          <button class="starter-btn" data-msg="What content is on the process page?">Explore process page content</button>
+        </div>
+      </div>
+
+      <div class="status-bar" id="statusBar"></div>
+
+      <div class="chat-input-area">
+        <textarea class="chat-input" id="chatInput" placeholder="Describe your edit..." rows="1"></textarea>
+        <button class="send-btn" id="sendBtn">Send</button>
+      </div>
+    </div>
+
+    <div class="preview-panel">
+      <div class="preview-header">
+        <select id="pageSelect">
+          <option value="index.html">Conversation (index)</option>
+          <option value="conversation-2.html">Follow-Up (Mar 24)</option>
+          <option value="process.html">Process</option>
+        </select>
+        <label class="annotation-toggle">
+          <input type="checkbox" id="annotationToggle" checked> Annotations
+        </label>
+      </div>
+      <iframe class="preview-frame" id="previewFrame" src="/index.html"></iframe>
+    </div>
+  </div>
+
+  <script>
+    const API = '/.netlify/functions/chat';
+    let token = localStorage.getItem('cms_token');
+    let conversationMessages = [];
+    let hasUnpublishedChanges = false;
+
+    // Client-side content state — fetched from the live site, updated after edits
+    let siteContent = { site: null, index: null, process: null };
+    let contentLoaded = false;
+
+    // Elements
+    const loginScreen = document.getElementById('loginScreen');
+    const loginPassword = document.getElementById('loginPassword');
+    const loginBtn = document.getElementById('loginBtn');
+    const loginError = document.getElementById('loginError');
+    const app = document.getElementById('app');
+    const messagesEl = document.getElementById('messages');
+    const starters = document.getElementById('starters');
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const publishBtn = document.getElementById('publishBtn');
+    const pageSelect = document.getElementById('pageSelect');
+    const previewFrame = document.getElementById('previewFrame');
+    const annotationToggle = document.getElementById('annotationToggle');
+    const statusBar = document.getElementById('statusBar');
+
+    // Fetch content JSON from the live site
+    async function loadContent() {
+      try {
+        setStatus('Loading content...', '');
+        const [siteRes, indexRes, processRes] = await Promise.all([
+          fetch('/content/site.json?t=' + Date.now()),
+          fetch('/content/index.json?t=' + Date.now()),
+          fetch('/content/process.json?t=' + Date.now())
+        ]);
+        if (!siteRes.ok || !indexRes.ok || !processRes.ok) {
+          throw new Error('Failed to fetch content files');
+        }
+        siteContent.site = await siteRes.json();
+        siteContent.index = await indexRes.json();
+        siteContent.process = await processRes.json();
+        contentLoaded = true;
+        setStatus('Content loaded', 'success');
+        setTimeout(() => setStatus('', ''), 2000);
+      } catch (err) {
+        setStatus('Failed to load content: ' + err.message, 'error');
+        console.error('Content load error:', err);
+      }
+    }
+
+    // Auth
+    if (token) {
+      loginScreen.classList.add('hidden');
+      app.classList.add('visible');
+      loadContent();
+    }
+
+    loginBtn.addEventListener('click', doLogin);
+    loginPassword.addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+    async function doLogin() {
+      loginError.textContent = '';
+      try {
+        const res = await fetch(API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'login', password: loginPassword.value })
+        });
+        const data = await res.json();
+        if (res.ok && data.token) {
+          token = data.token;
+          localStorage.setItem('cms_token', token);
+          loginScreen.classList.add('hidden');
+          app.classList.add('visible');
+          loadContent();
+        } else {
+          loginError.textContent = data.error || 'Invalid password';
+        }
+      } catch {
+        loginError.textContent = 'Connection error';
+      }
+    }
+
+    // Chat
+    sendBtn.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+    });
+    chatInput.addEventListener('input', () => {
+      chatInput.style.height = 'auto';
+      chatInput.style.height = Math.min(chatInput.scrollHeight, 120) + 'px';
+    });
+
+    // Starters
+    document.querySelectorAll('.starter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        chatInput.value = btn.dataset.msg;
+        sendMessage();
+      });
+    });
+
+    async function sendMessage() {
+      const text = chatInput.value.trim();
+      if (!text) return;
+      if (!contentLoaded) {
+        setStatus('Content not loaded yet. Retrying...', 'error');
+        await loadContent();
+        if (!contentLoaded) return;
+      }
+
+      chatInput.value = '';
+      chatInput.style.height = 'auto';
+      starters.style.display = 'none';
+
+      addMessage('user', text);
+      conversationMessages.push({ role: 'user', content: text });
+
+      sendBtn.disabled = true;
+      const typingEl = addTyping();
+
+      try {
+        const res = await fetch(API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+          body: JSON.stringify({
+            action: 'chat',
+            messages: conversationMessages,
+            content: siteContent
+          })
+        });
+
+        if (res.status === 401) {
+          localStorage.removeItem('cms_token');
+          location.reload();
+          return;
+        }
+
+        const data = await res.json();
+        typingEl.remove();
+
+        if (data.error) {
+          addMessage('assistant', 'Error: ' + data.error);
+        } else {
+          addMessage('assistant', data.reply, data.changes);
+          // Update conversation history from server
+          if (data.messages) {
+            conversationMessages = data.messages;
+          }
+          // Update local content state if changes were made
+          if (data.content) {
+            siteContent = data.content;
+          }
+          // If changes were made, enable publish
+          if (data.changes && data.changes.length > 0) {
+            hasUnpublishedChanges = true;
+            publishBtn.disabled = false;
+            setStatus('Changes ready to publish', 'success');
+          }
+        }
+      } catch (err) {
+        typingEl.remove();
+        addMessage('assistant', 'Connection error: ' + err.message);
+      }
+
+      sendBtn.disabled = false;
+      chatInput.focus();
+    }
+
+    function addMessage(role, text, changes) {
+      const div = document.createElement('div');
+      div.className = `message ${role}`;
+      const bubble = document.createElement('div');
+      bubble.className = 'message-bubble';
+      bubble.textContent = text;
+      div.appendChild(bubble);
+
+      if (changes && changes.length > 0) {
+        const badge = document.createElement('div');
+        badge.className = 'change-badge';
+        badge.textContent = `${changes.length} change${changes.length > 1 ? 's' : ''} applied`;
+        div.appendChild(badge);
+      }
+
+      messagesEl.appendChild(div);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+      return div;
+    }
+
+    function addTyping() {
+      const div = document.createElement('div');
+      div.className = 'message assistant';
+      div.innerHTML = '<div class="message-bubble"><div class="typing"><span></span><span></span><span></span></div></div>';
+      messagesEl.appendChild(div);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+      return div;
+    }
+
+    function setStatus(text, type) {
+      statusBar.textContent = text;
+      statusBar.className = 'status-bar' + (type ? ' ' + type : '');
+    }
+
+    // Publish — sends current content state to deploy function
+    publishBtn.addEventListener('click', async () => {
+      if (!contentLoaded) {
+        setStatus('Content not loaded', 'error');
+        return;
+      }
+
+      publishBtn.disabled = true;
+      publishBtn.textContent = 'Publishing...';
+      publishBtn.classList.add('publishing');
+      setStatus('Deploying to production...', '');
+
+      try {
+        const res = await fetch('/.netlify/functions/deploy', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+          body: JSON.stringify({ content: siteContent })
+        });
+        const data = await res.json();
+        if (data.success) {
+          hasUnpublishedChanges = false;
+          publishBtn.textContent = 'Published!';
+          setStatus('Deploy complete! Changes are live.', 'success');
+          // Reload preview to show deployed content
+          previewFrame.src = previewFrame.src;
+          setTimeout(() => {
+            publishBtn.textContent = 'Publish';
+            publishBtn.classList.remove('publishing');
+          }, 3000);
+        } else {
+          throw new Error(data.error);
+        }
+      } catch (err) {
+        setStatus('Deploy failed: ' + err.message, 'error');
+        publishBtn.textContent = 'Retry Publish';
+        publishBtn.disabled = false;
+        publishBtn.classList.remove('publishing');
+      }
+    });
+
+    // Preview page selector
+    pageSelect.addEventListener('change', () => {
+      previewFrame.src = '/' + pageSelect.value;
+    });
+
+    // Annotation overlay injection
+    function injectAnnotations() {
+      try {
+        const doc = previewFrame.contentDocument;
+        if (!doc) return;
+
+        // Remove existing
+        const existing = doc.getElementById('annotation-overlay-style');
+        if (existing) existing.remove();
+        const existingScript = doc.getElementById('annotation-overlay-script');
+        if (existingScript) existingScript.remove();
+
+        if (!annotationToggle.checked) return;
+
+        const style = doc.createElement('style');
+        style.id = 'annotation-overlay-style';
+        style.textContent = `
+          [data-content-path] { position: relative; cursor: pointer; transition: outline 0.15s; }
+          [data-content-path]:hover { outline: 2px solid rgba(244, 63, 94, 0.6); outline-offset: 2px; }
+          .annotation-tooltip { position: fixed; background: #1a1a1a; color: #f472b6; font-family: 'Inter', monospace; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 4px; pointer-events: none; z-index: 99999; white-space: nowrap; box-shadow: 0 2px 8px rgba(0,0,0,0.3); transform: translateY(-100%); margin-top: -6px; }
+        `;
+        doc.head.appendChild(style);
+
+        const script = doc.createElement('script');
+        script.id = 'annotation-overlay-script';
+        script.textContent = `
+          (function() {
+            let tooltip = null;
+            function showTooltip(el, e) {
+              if (!tooltip) {
+                tooltip = document.createElement('div');
+                tooltip.className = 'annotation-tooltip';
+                document.body.appendChild(tooltip);
+              }
+              const path = el.getAttribute('data-content-path');
+              const parts = path.split('.');
+              const label = parts.slice(1).map(p => p.replace(/\\[(\\d+)\\]/, ' #$1')).join(' > ');
+              tooltip.textContent = label;
+              tooltip.style.display = 'block';
+              tooltip.style.left = e.clientX + 'px';
+              tooltip.style.top = e.clientY + 'px';
+            }
+            function hideTooltip() {
+              if (tooltip) tooltip.style.display = 'none';
+            }
+            document.addEventListener('mouseover', function(e) {
+              const el = e.target.closest('[data-content-path]');
+              if (el) showTooltip(el, e);
+              else hideTooltip();
+            });
+            document.addEventListener('mousemove', function(e) {
+              const el = e.target.closest('[data-content-path]');
+              if (el && tooltip) {
+                tooltip.style.left = e.clientX + 'px';
+                tooltip.style.top = e.clientY + 'px';
+              }
+            });
+            document.addEventListener('click', function(e) {
+              const el = e.target.closest('[data-content-path]');
+              if (el) {
+                e.preventDefault();
+                e.stopPropagation();
+                const path = el.getAttribute('data-content-path');
+                window.parent.postMessage({ type: 'element-click', path: path, text: el.textContent.trim().slice(0, 80) }, '*');
+              }
+            }, true);
+          })();
+        `;
+        doc.body.appendChild(script);
+      } catch (e) {
+        // Cross-origin or not loaded yet
+      }
+    }
+
+    previewFrame.addEventListener('load', () => {
+      setTimeout(injectAnnotations, 100);
+    });
+
+    annotationToggle.addEventListener('change', injectAnnotations);
+
+    // Listen for element clicks from preview
+    window.addEventListener('message', (e) => {
+      if (e.data && e.data.type === 'element-click') {
+        const path = e.data.path;
+        const preview = e.data.text;
+        chatInput.value = `Change [${path}]: "${preview}" to `;
+        chatInput.focus();
+        chatInput.setSelectionRange(chatInput.value.length, chatInput.value.length);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,276 @@
+{
+  "meta": {
+    "title": "Follow-Up: From Concept to Client Pipeline &mdash; Agentic Web Design",
+    "description": "A follow-up conversation between TJ Cichecki and Rob Sulzer on turning agentic web design into a repeatable client service for nonprofits.",
+    "ogTitle": "Follow-Up: From Concept to Client Pipeline",
+    "ogDescription": "Day two. The system works. Now how do we operationalize it?"
+  },
+  "header": {
+    "dateline": "WORKHORSE &times; GODOGOOD &mdash; MARCH 24, 2026",
+    "title": "From Concept to Client Pipeline",
+    "subtitle": "A follow-up conversation between TJ Cichecki (Workhorse) and Rob Sulzer (GoDoGood) on operationalizing agentic web design &mdash; from live demos to real nonprofit clients.",
+    "linkText": "Read the original conversation &rarr;",
+    "linkHref": "/index.html"
+  },
+  "recap": {
+    "label": "24 HOURS LATER",
+    "heading": "What happened since yesterday",
+    "items": [
+      {
+        "stat": "~30 min",
+        "text": "Time to build the full process documentation site, deployed to a live server"
+      },
+      {
+        "stat": "~1 hr",
+        "text": "Time to build a working click-to-edit admin panel with live preview"
+      },
+      {
+        "stat": "3",
+        "text": "New inbound leads that came in overnight &mdash; all nonprofits needing websites"
+      }
+    ]
+  },
+  "themes": {
+    "label": "KEY THEMES",
+    "heading": "What emerged from Day 2",
+    "cards": [
+      {
+        "number": "01",
+        "title": "The CMS Is the Conversation",
+        "description": "TJ demoed the click-to-edit admin panel &mdash; hover over any element, click it, tell Claude what to change, and it updates live. No Sanity, no WordPress admin. The editing interface is a chat window."
+      },
+      {
+        "number": "02",
+        "title": "Minimum Viable Brand",
+        "description": "Not every nonprofit needs a $30K brand overhaul. The concept of an MVB &mdash; minimum viable brand &mdash; gives clients a logo, a site, and enough visual identity to be credible. Build on it later."
+      },
+      {
+        "number": "03",
+        "title": "The $5K&ndash;$10K Sweet Spot",
+        "description": "Small nonprofits with limited budgets are the entry point. One conversation, two to three days of build, deployed and done. The agentic model makes these profitable instead of loss leaders."
+      },
+      {
+        "number": "04",
+        "title": "Gateway to Retainers",
+        "description": "Websites are the entry point, but the real value is ongoing: donor campaigns, social creative, annual reports, email newsletters. Get in the door with a site, stay for the mission."
+      },
+      {
+        "number": "05",
+        "title": "Scale Through People, Not Code",
+        "description": "TJ innovates and builds the tools. Then onboards designers who execute using those tools. The creative director role shifts from production to system design and quality assurance."
+      },
+      {
+        "number": "06",
+        "title": "Micro-Tools for Clients",
+        "description": "Beyond websites: branded social graphic generators, content calendar tools, asset management. Each client gets bespoke micro-tools built into their site that solve their specific operational problems."
+      }
+    ]
+  },
+  "quotes": [
+    {
+      "text": "From when we hung up to when you had this document &mdash; two hours later. It was just really impressive.",
+      "author": "Rob Sulzer",
+      "context": "On the speed of the process documentation site"
+    },
+    {
+      "text": "The point is to take the coding dev part out of it. It frees the creative, the designer, the strategist to sit and use that time on UI/UX and interacting with the client.",
+      "author": "Rob Sulzer",
+      "context": "On what agentic design actually changes"
+    },
+    {
+      "text": "We're not going to involve the whole team. You're going to interact with one person and he's going to build what you need. That's how we save you money.",
+      "author": "TJ Cichecki",
+      "context": "On the pitch to budget-conscious nonprofits"
+    }
+  ],
+  "liveDemo": {
+    "label": "LIVE DEMO",
+    "heading": "The admin panel in action",
+    "description": "During the call, TJ demonstrated the click-to-edit interface he built in roughly an hour. The system works: hover any content block to see its label, click to select it, describe your change in natural language, and Claude updates the site. No CMS login. No content models. No deploy pipeline. Just conversation.",
+    "features": [
+      {
+        "title": "Annotation Overlay",
+        "description": "Every content block has a hover tooltip showing its path. Click any element to reference it in the chat."
+      },
+      {
+        "title": "Conversational Editing",
+        "description": "Type what you want changed in plain English. Claude reads the current content, makes the edit, and shows you old vs. new."
+      },
+      {
+        "title": "One-Click Publish",
+        "description": "When you're happy with changes, hit Publish. The site rebuilds from templates and deploys to production in seconds."
+      },
+      {
+        "title": "No External CMS",
+        "description": "Content lives in JSON files. The editing interface is a Netlify Function calling Claude. No Sanity subscription, no WordPress plugins, no vendor lock-in."
+      }
+    ]
+  },
+  "pipeline": {
+    "label": "THE CLIENT PIPELINE",
+    "heading": "How a project flows",
+    "steps": [
+      {
+        "number": "01",
+        "title": "Lead Comes In",
+        "description": "GoDoGood's biz dev team qualifies the lead. Budget, timeline, scope. Is this a $5K site refresh or a $30K capital campaign?"
+      },
+      {
+        "number": "02",
+        "title": "Rob Has the Honest Conversation",
+        "description": "Are they ignorable? Does their brand resonate? Is the real problem messaging, not design? This filters out projects that aren't ready."
+      },
+      {
+        "number": "03",
+        "title": "Brief Handoff",
+        "description": "The qualifying call is recorded, transcribed, and processed into a brief. TJ gets the context without a separate debrief meeting."
+      },
+      {
+        "number": "04",
+        "title": "TJ Builds End-to-End",
+        "description": "One conversation with the client. Capture requirements, brand direction, content. Then build: brand, site, and documentation. Days, not months."
+      },
+      {
+        "number": "05",
+        "title": "Client Edits via Chat",
+        "description": "Revisions happen through the admin panel. Client says what they want changed. No back-and-forth email chains. No design review rounds."
+      },
+      {
+        "number": "06",
+        "title": "Upsell to Ongoing",
+        "description": "The site is the gateway. Donor campaigns, annual reports, social strategy, email newsletters &mdash; the relationship expands from there."
+      }
+    ]
+  },
+  "market": {
+    "label": "THE MARKET",
+    "heading": "Why nonprofits, why now",
+    "stats": [
+      {
+        "value": "~2M",
+        "label": "Registered nonprofits in the US"
+      },
+      {
+        "value": "100&ndash;150K",
+        "label": "Doing $2M+ annually"
+      },
+      {
+        "value": "1 in 5",
+        "label": "Actively seeking a new website"
+      },
+      {
+        "value": "91%",
+        "label": "Under $1M &mdash; underserved by traditional agencies"
+      }
+    ],
+    "insight": "Most nonprofits have a one-person marketing department trying to do everything. They can't afford a traditional agency's $30K website. But they can't afford to be ignorable either. The agentic model makes quality design accessible at their budget."
+  },
+  "wordpress": {
+    "label": "THE ELEPHANT IN THE ROOM",
+    "heading": "What about WordPress?",
+    "points": [
+      {
+        "title": "WordPress isn't going away",
+        "description": "Some clients will always want WordPress. Their IT team requires it. Their webmaster knows it. That's fine &mdash; AI tools can accelerate WordPress builds too."
+      },
+      {
+        "title": "WordPress is adding AI features",
+        "description": "GoDoGood's paid media lead in South Africa confirmed they're experimenting with WordPress AI tools. The CMS landscape is shifting everywhere."
+      },
+      {
+        "title": "The agentic model is CMS-agnostic",
+        "description": "The real innovation isn't the output format. It's the process: one person, end-to-end, conversation-driven. Whether the output is static HTML, WordPress, or something else is secondary."
+      }
+    ]
+  },
+  "scaling": {
+    "label": "SCALING THE MODEL",
+    "heading": "From one builder to a team",
+    "phases": [
+      {
+        "phase": "Now",
+        "title": "Prove It",
+        "items": [
+          "TJ handles projects end-to-end",
+          "Build the tooling and refine the process",
+          "Document everything as you go",
+          "First few client projects establish the pattern"
+        ]
+      },
+      {
+        "phase": "Next",
+        "title": "Onboard Designers",
+        "items": [
+          "Hire creative designers, not coders",
+          "TJ onboards and trains on the agentic workflow",
+          "Build a starter kit: software, tools, setup in one package",
+          "Designers work under TJ at Workhorse"
+        ]
+      },
+      {
+        "phase": "Future",
+        "title": "TJ as Innovation Lead",
+        "items": [
+          "TJ focuses on R&D: new tools, new workflows, new capabilities",
+          "Designers execute client work using the established system",
+          "Monthly updates to the team on what's changed",
+          "The role shifts from builder to system architect"
+        ]
+      }
+    ]
+  },
+  "ideas": {
+    "label": "NEW IDEAS",
+    "heading": "What opened up in this conversation",
+    "items": [
+      {
+        "title": "Social Graphic Generator",
+        "description": "Upload a logo, pull stock images, output branded graphics in four sizes for every platform. Built as a micro-tool on the client's own site.",
+        "tag": "Tool"
+      },
+      {
+        "title": "Figma MCP Integration",
+        "description": "Connect Claude Code to Figma directly. Build brand assets programmatically, output to a design file for human review and export.",
+        "tag": "Workflow"
+      },
+      {
+        "title": "Brand Guidelines on the Website",
+        "description": "Instead of a PDF brand guide, the guidelines live on the site itself. Colors, typography, usage rules &mdash; documented, versioned, always current.",
+        "tag": "Concept"
+      },
+      {
+        "title": "AI Upskilling for Nonprofits",
+        "description": "FedEx is training 40,000 employees on AI. Nonprofits need the same. The pitch: hire a consultant to teach your team, not to do the work for you.",
+        "tag": "Service"
+      },
+      {
+        "title": "Content Calendar Automation",
+        "description": "Connect a content calendar to branded templates. Draft posts automatically, route for human review, maintain visual consistency across all channels.",
+        "tag": "Tool"
+      },
+      {
+        "title": "Meet at Base Camp Volume Play",
+        "description": "GoDoGood's campground/RV resort sister agency could feed five sites per week. Template-based, fast turnaround, low-touch.",
+        "tag": "Opportunity"
+      }
+    ]
+  },
+  "nextSteps": {
+    "label": "NEXT STEPS",
+    "heading": "What we agreed to do",
+    "items": [
+      "Rob sends the first qualifying small nonprofit lead to TJ",
+      "TJ handles the project end-to-end as a proof of concept",
+      "Figure out pricing and compensation model together",
+      "TJ researches Figma MCP for brand asset generation",
+      "TJ builds a designer onboarding starter kit",
+      "TJ publishes the process as potential inbound marketing content",
+      "Continue iterating on the click-to-edit admin panel"
+    ]
+  },
+  "closingQuote": {
+    "text": "I can edit the text from within the browser now without having to go back to Claude Code. The client could edit their website themselves. It just built the same thing as Sanity but in straight code.",
+    "author": "TJ Cichecki",
+    "context": "Confirmed live during the call"
+  }
+}

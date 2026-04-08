@@ -1,0 +1,243 @@
+{
+  "meta": {
+    "title": "The Agentic Design System — Process | Workhorse × GoDoGood",
+    "description": "A repeatable, productized process for building websites with AI agents — from audience research to autonomous content systems.",
+    "ogTitle": "The Agentic Website Design System (2026)",
+    "ogDescription": "A 10-step productized process for building websites with AI agents."
+  },
+  "header": {
+    "dateline": "The Agentic Design System &mdash; 2026",
+    "title": "The Agentic Website Design System",
+    "subtitle": "A repeatable, productized process for building websites with AI agents. Not designing pages &mdash; building a 3-layer system that evolves, publishes, and performs autonomously."
+  },
+  "philosophy": {
+    "label": "Core Philosophy",
+    "heading": "You're not designing a website. You're building a 3-layer system.",
+    "layers": [
+      {
+        "tag": "Layer 1",
+        "cssClass": "layer-human",
+        "title": "Human Layer",
+        "description": "Visual design, UX, emotion. The taste, restraint, and brand narrative that separates craft from AI slop. This is your moat."
+      },
+      {
+        "tag": "Layer 2",
+        "cssClass": "layer-ai",
+        "title": "AI Agent Layer",
+        "description": "Dynamic content, automation, personalization. AI agents handle the execution &mdash; building, iterating, and scaling what the human layer designs."
+      },
+      {
+        "tag": "Layer 3",
+        "cssClass": "layer-llm",
+        "title": "LLM Discovery Layer",
+        "description": "SEO, structured content, AI visibility. Websites built to be found &mdash; not just by Google, but by the LLMs that are increasingly how people discover information."
+      }
+    ]
+  },
+  "tools": {
+    "label": "Tool Stack",
+    "heading": "The tools powering each layer",
+    "cards": [
+      {
+        "cssClass": "tc-research",
+        "category": "Research + Strategy",
+        "name": "Brand Intelligence Engine",
+        "description": "Audience + search intent research. Outputs structured JSON &mdash; personas, queries, pain points, messaging angles."
+      },
+      {
+        "cssClass": "tc-copy",
+        "category": "Copy + Content",
+        "name": "Brand Copy Coach",
+        "description": "Structured, SEO-ready page copy. Feeds from research JSON to generate full site content with minimal manual refinement."
+      },
+      {
+        "cssClass": "tc-design",
+        "category": "Design / Creative Direction",
+        "name": "Variant",
+        "description": "AI-generated UI systems &mdash; layouts, animations, components, visual language. The creative director you iterate with."
+      },
+      {
+        "cssClass": "tc-build",
+        "category": "Build / Engineering",
+        "name": "Claude Code",
+        "description": "Front-end generation + system assembly. Turns design systems into production code, section by section."
+      },
+      {
+        "cssClass": "tc-content",
+        "category": "Content / Growth",
+        "name": "Custom AI Agents",
+        "description": "Blog generation, SEO velocity, auto-publishing. The autonomous content engine that keeps the site growing."
+      }
+    ]
+  },
+  "flow": {
+    "label": "System Flow",
+    "heading": "The end-to-end pipeline",
+    "nodes": ["Research", "Copy", "Design", "Components", "Build", "Populate", "Humanize", "Scale", "Automate"]
+  },
+  "steps": {
+    "label": "Full Process",
+    "heading": "10 steps from zero to autonomous website",
+    "intro": "Each step feeds into the next. The output of research becomes the input for copy, which feeds design, which feeds the build.",
+    "items": [
+      {
+        "number": 1,
+        "cssClass": "step-1",
+        "title": "Audience Intelligence Layer",
+        "tool": "Brand Intelligence Engine",
+        "description": "Run the full research flow. Extract top search intents, emotional triggers, and category language. This becomes your source of truth for everything downstream.",
+        "outputs": ["Audience personas", "Search queries", "Pain points", "Messaging angles", "JSON export"],
+        "callout": null,
+        "promptBlock": null
+      },
+      {
+        "number": 2,
+        "cssClass": "step-2",
+        "title": "Copy System Generation",
+        "tool": "Brand Copy Coach",
+        "description": "Feed in the JSON from research. Generate full site copy &mdash; homepage, about, services, contact, blog direction, SEO structure. Manually refine ~10&ndash;20%.",
+        "outputs": ["Homepage copy", "About / Services / Contact", "Blog direction", "SEO structure"],
+        "callout": { "type": "callout-key", "text": "This step replaces traditional UX writing, SEO planning, and content strategy decks." },
+        "promptBlock": null
+      },
+      {
+        "number": 3,
+        "cssClass": "step-3",
+        "title": "Design System Creation",
+        "tool": "Variant",
+        "description": "Start with the hero &mdash; paste homepage hero copy and prompt for futuristic, modern, visually striking designs. Iterate on layout variations, animation styles, and typography. Then build section by section, then build the component library.",
+        "outputs": ["Hero sections", "Page sections", "Component system", "Motion ideas", "Visual language"],
+        "callout": { "type": "callout-warning", "text": "Variant = Creative Director. You = Taste + Editor. This is where most people fail by accepting AI slop." },
+        "promptBlock": null
+      },
+      {
+        "number": 4,
+        "cssClass": "step-4",
+        "title": "System Transfer to Build",
+        "tool": "Claude Code",
+        "description": "Initialize the project, set scope, and feed the first section. Paste Variant code &mdash; hero first, then sections, then full page. Focus on implementation, not redesign.",
+        "outputs": ["Functional website", "Responsive layouts", "Component structure"],
+        "callout": null,
+        "promptBlock": "This is the design system.\nBuild homepage section by section.\nFocus on implementation, not redesign."
+      },
+      {
+        "number": 5,
+        "cssClass": "step-5",
+        "title": "Full Page Assembly",
+        "tool": null,
+        "description": "Transfer all sections first. Don't refine early. The goal is a complete ugly version first &mdash; get everything on the page before polishing anything.",
+        "outputs": null,
+        "callout": { "type": "callout-insight", "text": "Goal: complete ugly version first. Resist the urge to polish section-by-section." },
+        "promptBlock": null
+      },
+      {
+        "number": 6,
+        "cssClass": "step-6",
+        "title": "Copy Injection Pass",
+        "tool": "Claude Code",
+        "description": "Feed the final copy files (Markdown or text) and let Claude match all copy exactly to provided files, adapting layouts intelligently using the existing system.",
+        "outputs": null,
+        "callout": null,
+        "promptBlock": "Match all copy exactly to provided files.\nAdapt layouts intelligently using existing system."
+      },
+      {
+        "number": 7,
+        "cssClass": "step-7",
+        "title": "Humanization Layer",
+        "tool": "Your Assets + Brand Eye",
+        "description": "Add photography and video, brand colors, typography system, spacing and hierarchy fixes. Use your own assets, AI image tools (optional), and reference boards.",
+        "outputs": null,
+        "callout": { "type": "callout-key", "text": "This is where it stops feeling like AI. This is the critical step most people skip." },
+        "promptBlock": null
+      },
+      {
+        "number": 8,
+        "cssClass": "step-8",
+        "title": "Multi-Page Expansion",
+        "tool": "Claude Code",
+        "description": "Feed remaining page copy and let Claude generate About, Services, Blog, and Contact pages. Apply the homepage design system consistently across all pages.",
+        "outputs": null,
+        "callout": null,
+        "promptBlock": "Apply homepage design system consistently across all pages."
+      },
+      {
+        "number": 9,
+        "cssClass": "step-9",
+        "title": "Agentic Content Layer",
+        "tool": "Custom AI Agents",
+        "description": "Build the autonomous growth engine: AI blog writer agents, SEO content engine, and auto-publishing system. This is the differentiator &mdash; the site doesn't just launch, it grows.",
+        "outputs": ["High-volume content", "LLM visibility", "Organic growth"],
+        "callout": null,
+        "promptBlock": null
+      },
+      {
+        "number": 10,
+        "cssClass": "step-10",
+        "title": "Editing + Live Iteration",
+        "tool": "Claude Code",
+        "description": "Click-to-edit UI inside Claude. Update copy, swap images, adjust layout &mdash; all through conversation. This replaces the traditional CMS editing experience entirely.",
+        "outputs": null,
+        "callout": { "type": "callout-insight", "text": "This replaces the CMS UX layer (Webflow, WordPress admin). The AI becomes the editing interface." },
+        "promptBlock": null
+      }
+    ]
+  },
+  "pitfalls": {
+    "label": "Watch Out",
+    "heading": "Where this process breaks &mdash; and how to fix it",
+    "cards": [
+      {
+        "label": "Problem 1",
+        "title": "AI Slop Design",
+        "description": "The default AI output is generic, overdesigned, and instantly recognizable as machine-generated.",
+        "fix": "Aggressive iteration in Variant. Reduce typography chaos. Enforce grid + system. Never accept the first output."
+      },
+      {
+        "label": "Problem 2",
+        "title": "Over-automation",
+        "description": "Skipping the human review step and shipping raw AI output leads to sites that feel hollow and generic.",
+        "fix": "Insert a human pass BEFORE launch. Every time. The Humanization Layer (Step 7) is non-negotiable."
+      },
+      {
+        "label": "Problem 3",
+        "title": "Weak Brand POV",
+        "description": "AI can generate layouts and copy, but it can't generate a point of view. Without strong brand narrative, the site is wallpaper.",
+        "fix": "Stronger narrative layer. This is your specialty &mdash; editorial taste, brand narrative, restraint, hierarchy."
+      }
+    ]
+  },
+  "strategy": {
+    "label": "Strategic Positioning",
+    "heading": "How to use this system",
+    "cards": [
+      {
+        "title": "The WRKHRS \"Brand Engine\" Product",
+        "type": "comparison",
+        "leftLabel": "Not this",
+        "leftText": "\"We design websites\"",
+        "leftStrikethrough": true,
+        "rightLabel": "This",
+        "rightText": "\"We build living brand systems that evolve, publish, and perform autonomously\""
+      },
+      {
+        "title": "Your Differentiator",
+        "type": "comparison",
+        "leftLabel": "Most people",
+        "leftText": "Use AI for speed",
+        "leftStrikethrough": false,
+        "rightLabel": "You",
+        "rightText": "Use AI for systems + leverage"
+      },
+      {
+        "title": "Your Moat",
+        "type": "moat",
+        "intro": "This system is missing one thing that can't be automated:",
+        "items": ["Editorial taste", "Brand narrative", "Restraint", "Hierarchy"]
+      }
+    ]
+  },
+  "footerLink": {
+    "text": "Read the conversation",
+    "href": "index.html"
+  }
+}
